@@ -17,6 +17,7 @@ function main(){
     }
     select.addEventListener("change",eventFunction);
 }
+
 function eventFunction(){
     removeAllChildNodes(container);  
     let value = this.options[this.selectedIndex].value;
@@ -99,6 +100,7 @@ function accion() {
             x9 = 0;
         }
     }
+    return [x0,x1,x2,x3,x4,x5,x6,x7,x8,x9];
 
     window.location.href = URL_WEB+"passData/?can=" + value+ "&x0="+x0+"&x1="+x1+"&x2="+x2+"&x3="+x3+"&x4="+x4+"&x5="+x5+"&x6="+x6+"&x7="+x7+"&x8="+x8+"&x9="+x9+"";
 }

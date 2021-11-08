@@ -9,10 +9,17 @@
 <body>
     <h3>Aqui se recibiran los datos</h3>
     <form>
+        <label for="tipo" > Metodo a usar: </label>
+        <select name="method" id="method">
+            <option value="bairstow">Metodo bairstow</option>
+            <option value="muller">Metodo Muller</option>
+            <option value="newton">Metodo Newton Raphson</option>
+        </select>
+
         <select name="coef" id="coeficientes">
-            <option value="1">1 variable</option>
+            <option value="1" selected>1 variable</option>
             <option value="2">2 variables</option>
-            <option value="3" selected>3 variables</option>
+            <option value="3" >3 variables</option>
             <option value="4">4 variables</option>
             <option value="5">5 variables</option>
             <option value="6">6 variables</option>
@@ -36,7 +43,8 @@
     <img src="{% static 'deepForest.jpg' %}" width="200 px">
 
 </body>
-<script src="{% static 'logicInputData.js' %}">
+
+<script src="{% static 'main.js' %}" type="module">
         //aqui se llamaran a los archivos que haran logica de js
 </script>
 

@@ -2,17 +2,16 @@
 <html>
     <head>
         <title>Encontrar Raices con pasos</title>
+        {% load static %}
     </head>
-    <script>
-        //aqui se llamaran a los archivos que haran logica de js
-    </script>
+    
     <body>
         <h3>Aqui se recibiran los datos</h3>
         <form>
-            <select name="coeficientes" id="coeficientes">
+            <select name="coef" id="coeficientes">
                 <option value="1">1 variable</option>
                 <option value="2">2 variables</option>
-                <option value="3">3 variables</option>
+                <option value="3" selected>3 variables</option>
                 <option value="4">4 variables</option>
                 <option value="5">5 variables</option>
                 <option value="6">6 variables</option>
@@ -31,5 +30,10 @@
                 -->
             </div>
         </form>
+        <img src="{% static 'deepForest.jpg' %}" width="200 px">
+    
     </body>
+    <script src="{% static 'logicInputData.js' %}">
+        //aqui se llamaran a los archivos que haran logica de js
+    </script>
 </html>

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+import math
 # Create your views here.
 
 def home(request):
@@ -11,19 +11,24 @@ def getData(request):
 def passData(request):
 
     start = request.GET
-    con = 0;
+    con = 0
     cant = int(start["can"])
     list = []
-    for key,value in start.items():
+    for _,value in start.items():
         if con == 0:
             con = con + 1
             continue
         if cant+1 == con:
             break
-
-        list.append(int(value))
+        try:
+            val=int(value)
+        except:
+            val = 0
+        
+        list.append(val)
         con = con + 1
-
+    #hacer el metodo correspondiente
+    
     print(list)
     return render(request,"passData.html")
 

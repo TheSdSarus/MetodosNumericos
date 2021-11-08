@@ -2,25 +2,20 @@
 
 //code logic for html Input Data
 
-
+const URL_WEB = "http://127.0.0.1:8000/";
 
 var container = document.getElementById("inputBoxes");
 var select = document.getElementById("coeficientes");
 function main(){
-
     if(select == null){
         console.log("No existe elemento!");
         return;
     } 
-    
     if(container == null){
         console.log("No existe el ID inputBoxes");
         return;
     }
-
-    
     select.addEventListener("change",eventFunction);
-
 }
 function eventFunction(){
     removeAllChildNodes(container);  
@@ -105,6 +100,7 @@ function accion() {
         }
     }
 
-    window.location.href = "http://127.0.0.1:8000/passData/?can=" + value+ "&x0="+x0+"&x1="+x1+"&x2="+x2+"&x3="+x3+"&x4="+x4+"&x5="+x5+"&x6="+x6+"&x7="+x7+"&x8="+x8+"&x9="+x9+"";
+    window.location.href = URL_WEB+"passData/?can=" + value+ "&x0="+x0+"&x1="+x1+"&x2="+x2+"&x3="+x3+"&x4="+x4+"&x5="+x5+"&x6="+x6+"&x7="+x7+"&x8="+x8+"&x9="+x9+"";
 }
+
 main();

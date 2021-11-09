@@ -9,27 +9,27 @@ def getData(request):
     return render(request,"inputData.html")
 
 def passData(request):
-
     start = request.GET
-    con = 0
-    cant = int(start["can"])
-    list = []
-    for _,value in start.items():
-        if con == 0:
-            con = con + 1
-            continue
-        if cant+1 == con:
+    method = start["method"]
+    lista = []
+    i = 0
+    for val in start.values():
+        key = "x"+str(i)
+        myval = start.get(key)
+        if myval:
+            try:
+                office = int(myval)
+            except:
+                office = 0
+            lista.append(office)
+        else:
+            print("No key exist, value is: ", myval,"i=",i)
             break
-        try:
-            val=int(value)
-        except:
-            val = 0
-        
-        list.append(val)
-        con = con + 1
+        i+=1
+
     #hacer el metodo correspondiente
-    
-    print(list)
+    print(method)
+    print(lista)
     return render(request,"passData.html")
 
 

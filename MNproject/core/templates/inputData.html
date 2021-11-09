@@ -11,7 +11,7 @@
     <form>
         <label for="tipo" > Metodo a usar: </label>
         <select name="method" id="method">
-            <option value="bairstow">Metodo bairstow</option>
+            <option value="bairstow" selected>Metodo bairstow</option>
             <option value="muller">Metodo Muller</option>
             <option value="newton">Metodo Newton Raphson</option>
         </select>
@@ -39,11 +39,13 @@
         </div>
         
     </form>
-    <button onclick="accion()">Click me</button>
+    <button id="sendButton">Click me</button>
     <img src="{% static 'deepForest.jpg' %}" width="200 px">
 
 </body>
+<!-- <script src="{% static 'inputData.js' %}">
 
+</script> -->
 <script src="{% static 'main.js' %}" type="module">
         //aqui se llamaran a los archivos que haran logica de js
 </script>

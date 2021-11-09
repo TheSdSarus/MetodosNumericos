@@ -1,12 +1,16 @@
 
 
 //code logic for html Input Data
+import {strMethod} from "./main.js";
 
 const URL_WEB = "http://127.0.0.1:8000/";
-
+export var hola = "AAAAAAA";
+var value = 10;
 var container = document.getElementById("inputBoxes");
 var select = document.getElementById("coeficientes");
-function main(){
+var sendButton = document.getElementById("sendButton");
+export var crossList = [];
+export function mainInput(){
     if(select == null){
         console.log("No existe elemento!");
         return;
@@ -15,7 +19,12 @@ function main(){
         console.log("No existe el ID inputBoxes");
         return;
     }
+    if(sendButton == null){
+        console.log("No existe el ID sendButton");
+        return;
+    }
     select.addEventListener("change",eventFunction);
+    sendButton.addEventListener("click",getData);
 }
 
 function eventFunction(){
@@ -26,9 +35,39 @@ function eventFunction(){
     createItems(intValue);
 
 }
+export function getData(){
+    let list = accion();
+    let filterList = [];
+    for(const x of list){
+        let val = x;
+        if(isNaN(x)){
+            val = 0;
+        }
+        filterList.push(val);
+    }
+    // return filterList;
+    console.log("Lista Filtrada: ");
+    console.log(filterList);
+    crossList = filterList;
+    sendData();
+}
+function sendData(){
+    console.log(sendData);
+    window.location.href = URL_WEB+"passData/?method=" + strMethod+ 
+    "&x0="+crossList[0]+
+    "&x1="+crossList[1]+
+    "&x2="+crossList[2]+
+    "&x3="+crossList[3]+
+    "&x4="+crossList[4]+
+    "&x5="+crossList[5]+
+    "&x6="+crossList[6]+
+    "&x7="+crossList[7]+
+    "&x8="+crossList[8]+
+    "&x9="+crossList[9]+"";    
+}
+
 
 function createItems(value){
-
     let cont = 0;
     while(value != cont){            
         let label = document.createElement("label");
@@ -51,7 +90,7 @@ function removeAllChildNodes(parent) {
 }
 
 function accion() {
-    let value = document.getElementById("coeficientes").value;
+    value = document.getElementById("coeficientes").value;
     let x0,x1,x2,x3,x4,x5,x6,x7,x8,x9;
     for(let i = 0; i < value; i++) {
         if(i==0){
@@ -102,7 +141,7 @@ function accion() {
     }
     return [x0,x1,x2,x3,x4,x5,x6,x7,x8,x9];
 
-    window.location.href = URL_WEB+"passData/?can=" + value+ "&x0="+x0+"&x1="+x1+"&x2="+x2+"&x3="+x3+"&x4="+x4+"&x5="+x5+"&x6="+x6+"&x7="+x7+"&x8="+x8+"&x9="+x9+"";
+    //window.location.href = URL_WEB+"passData/?can=" + value+ "&x0="+x0+"&x1="+x1+"&x2="+x2+"&x3="+x3+"&x4="+x4+"&x5="+x5+"&x6="+x6+"&x7="+x7+"&x8="+x8+"&x9="+x9+"";
 }
 
-main();
+// mainInput();

@@ -1,14 +1,17 @@
 
+import {mainInput,hola,crossList} from "./inputdata.js"; 
+var method = document.getElementById("method");
+export var strMethod = "";
 function main(){
-    var method = document.getElementById("method");
 
     if(method == null){
         console.log("No encontro el ID 'method'");
         return;
     }
+    method.addEventListener("change",funMethod); 
+    // console.log(hola); 
 
-    method.addEventListener("change",funMethod);
-    
+    mainInput();   
 }
 function funMethod(){
     let valMethod = this.value;
@@ -21,6 +24,10 @@ function funMethod(){
     }else{
         console.log("NOTHING Method!!");
     }
+    strMethod = valMethod;    
 }
 
 main();
+
+
+

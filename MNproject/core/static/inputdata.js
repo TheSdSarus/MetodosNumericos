@@ -1,7 +1,7 @@
 
 
 //code logic for html Input Data
-import {strMethod} from "./main.js";
+import {strMethod,getVariables} from "./main.js";
 
 const URL_WEB = "http://127.0.0.1:8000/";
 export var hola = "AAAAAAA";
@@ -53,6 +53,22 @@ export function getData(){
 }
 function sendData(){
     console.log(sendData);
+    let variables;
+    if(strMethod == "bairstow"){
+        variables = 0;
+    }else if(strMethod == "muller"){
+        variables = 3;
+    }else if(strMethod=="newton"){
+        variables = 2;
+    }else{
+        variables = -1;
+        console.log("Error, no tenemos el metodo conocido=",strMethod);
+        return;
+    }
+
+    let sendVars = getVariables(variables);
+    console.log(sendVars);
+
     window.location.href = URL_WEB+"passData/?method=" + strMethod+ 
     "&x0="+crossList[0]+
     "&x1="+crossList[1]+
@@ -63,7 +79,8 @@ function sendData(){
     "&x6="+crossList[6]+
     "&x7="+crossList[7]+
     "&x8="+crossList[8]+
-    "&x9="+crossList[9]+"";    
+    "&x9="+crossList[9]+
+    sendVars+"";    
 }
 
 
@@ -76,14 +93,16 @@ function createItems(value){
         let input = document.createElement("input");
         input.type="text";
         input.id = "x"+cont;
+
         let box = document.createElement("div");
         label.appendChild(input);
         box.appendChild(label);
         container.appendChild(box);
+
         cont++;
     } 
 }
-function removeAllChildNodes(parent) {
+export function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }

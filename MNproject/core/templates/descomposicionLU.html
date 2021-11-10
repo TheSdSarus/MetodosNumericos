@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Descomposicion LU</title>
+        {% load static %}
+    </head>
+    <script>
+        //aqui se llamaran a los archivos que haran logica de js
+    </script>
+    <body>
+        <h3>Descomposicion LU</h3>
+        <form name="" id="">
+            <select id="metodo" name="metodo">
+                <option value="gauss" selected>Metodo Gauss</option>
+                <option value="choleski">Metodo choleski</option>
+                <option value="crout">Metodo crout</option>
+            </select>
+            <select id="orderMatrix" name="orderMatrix">
+                <option value="3" selected>Matrix 3x3</option>
+                <option value="4" >Matrix 4x4</option>
+                <option value="5" >Matrix 5x5</option>
+            </select>
+            <div id="contenedorMatrix">
+                <input id="x0" name="x0" >
+            </div>
+            <button name="sendDataButton" id="sendDataButton">SendData</button>
+        </form>
+        <button name="utilButton" id="utilButton">Button Util</button>
+    </body>
+    <script src="{% static 'teo2/matrixLU.js' %}" type="module" >
+        //code 
+    </script>
+</html>

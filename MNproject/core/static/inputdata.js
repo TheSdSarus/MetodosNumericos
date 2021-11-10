@@ -3,7 +3,7 @@
 //code logic for html Input Data
 import {strMethod,getVariables} from "./main.js";
 
-const URL_WEB = "http://127.0.0.1:8000/";
+export const URL_WEB = "http://127.0.0.1:8000/";
 export var hola = "AAAAAAA";
 var value = 10;
 var container = document.getElementById("inputBoxes");

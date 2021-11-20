@@ -1,9 +1,21 @@
-#MULLER methods for cuztom function
-
 import cmath as cm
+COEFICIENTES = [1,0,1,-2]#siempre editar esta variables antes de hacer cualquier cosa
 str1 = ""
+#x**3 + 2*x**2 + 10*x - 20
+def newF(val=0):
+    # n-4 = 4 -4 = 0
+    # 1x^(n-1) + 2^(n-2) + 3^(n-3) + 4^(n-4)
+    result = 0
+    n = len(COEFICIENTES)
+    for grado in range(n):
+        result += COEFICIENTES[grado] * val**(n - grado -1)
+    return result 
+    #print("Resultado de la funcion",result)
+
 def f(x):
-    return x**3 + 2*x**2 + 10*x - 20
+    return newF(val=x)
+
+
 
 def f1(x1,x0):
     try:
@@ -47,10 +59,11 @@ def getX3(a0,a1,a2):
     
     return xplus
 
-def main():
-    x0 = 0
-    x1 = 1
-    x2 = 2
+def muller(guesses):
+    mystr = ""
+    x0 = guesses[0]
+    x1 = guesses[1]
+    x2 = guesses[2]
     tole = 10**-5
     error = tole/2
     memory = 0
@@ -61,21 +74,33 @@ def main():
         a2 = f3(x2,x1,x0)
         a1 = f2(x2,x1) -(x2+x1)*a2
         a0 = f(x2) - x2*(f2(x2,x1) - x1*a2)
-        print(f"x0={x0} x1={x1} x2={x2}")
-        print(f"a0={a0} a1={a1} a2={a2}")
+        mystr += (f"x0={x0} x1={x1} x2={x2}\n")
+        mystr += (f"a0={a0} a1={a1} a2={a2}\n")
 
         x3 = getX3(a0,a1,a2)
         x0 = x1
         x1 = x2
         memory = x2
         x2 = x3
-        print(f"x3={x3} f(x3)={f(x3)} error={error}\n")
-        
+        mystr += (f"x3={x3} f(x3)={f(x3)} error={error}\n")
+    
         maxIter-=1
+    return mystr
 
-
-
+##PASOS PARA USAR LA FUNCION
+# Los COEFICIENTES DEBES EDITARLOS CON LOS COEFICIENTES ACTUALES
+# LOS DESPUES DE BES PONER INITIAL GUESSES
+# LUEGO PONER COMO PARAMETRO EL MULLER(GUESSES=[x0,x1,x2])
+#luego recoger el str del metodo str1 = muller(guesses)
 if __name__ == "__main__":
-    main()
-
+    # mystr = main()
+    # print(mystr)
+    # x**3 + 0 + x**1 + -2
+    COEFICIENTES = [1, 2 ,10 , -20]
+    guesses = [0,1,2]
+    mystr = muller(guesses)
+    print(mystr)
+    #COEFICIENTES = [1,0,1,-2]
+    #newF(val=3)
+    #x**3 + 2*x**2 + 10*x - 20
 

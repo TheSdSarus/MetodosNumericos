@@ -5,6 +5,8 @@
 
 import cmath
 import random
+
+
 '''
    Bairstow's Method where:
       r = Initial guess
@@ -14,6 +16,7 @@ import random
    g = Polinomial's degree   
 '''   
 def bairstow(a,r,s,g,roots):
+	dumpStr = ""
 	if(g<1):
 		return None
 	if((g==1) and (a[1] != 0)):
@@ -57,19 +60,36 @@ def bairstow(a,r,s,g,roots):
 		roots.append(X2)
 		return bairstow(b[2:],r,s,g-2,roots)	
 
-'''     We will find all the roots of
-   -12*rnd() + 2x + 3x^2 - 6x^3 + 6x^4 - x^5
-'''
+# k = 0	#str
+# g = 5	#grado de la ecuacion
+# roots = []
+# a = [1,-3.5,2.75,2.125,-3.875,1.25]	#coeficientes
+# r = random.random()
+# s = random.random()
+# bairstow(a,r,s,g,roots)
+# print("\nFound Roots => \n")
+# for r in roots:
+# 	print("R" + str(k) + " = " + str(r))
+# 	k += 1
 
-k = 0	#str
-g = 5	#grade of equation
-roots = []
-a = [1,-3.5,2.75,2.125,-3.875,1.25]	#coeficcients
-r = -1#random.random()
-s = -1#random.random()
-bairstow(a,r,s,g,roots)
-print("\nFound Roots => \n")
-for r in roots:
-	print("R" + str(k) + " = " + str(r))
-	k += 1
+def bairstowMain(COEFICIENTES,r=None,s=None):
+	if not COEFICIENTES:
+		return "Necesitas llenar el aprametro Coeficientes!\n"
+		#COEFICIENTES = [1, -3.5 ,2.75 ,2.125 ,-3.875 ,1.25]	#coeficientes
+	g = 3 	#grado de la ecuacion
+	if not r or not s:
+		r = random.random()
+		s = random.random()
+	roots = []	
+	bairstow(COEFICIENTES,r,s,g,roots)
+	k=0
+	mystr = ""
+	for r in roots:
+		mystr += ("R" + str(k) + " = " + str(r)+"\n")
+		k += 1
+	return mystr	
 
+if __name__ == "__main__":
+	COEFICIENTES = [1, -3, 3 , -1]
+	mystr = bairstowMain(COEFICIENTES,r=0,s=0)	
+	print(mystr)

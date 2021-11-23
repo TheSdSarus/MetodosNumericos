@@ -18,14 +18,26 @@ def f(x):
     return newF(val=x)
 
 def bisection(a,b,N):
+    mystr = ""
     if f(a)*f(b) >= 0:
         print("Bisection method fails.!!!")
         return None
     a_n = a
     b_n = b
+    
     for n in range(1,N+1):
         m_n = (a_n + b_n)/2
+        mystr+=f"Iteracion #{n}\n"
+        mystr += f"""a={a_n}
+b={b_n}
+m={m_n}
+"""
         f_m_n = f(m_n)
+        mystr +=f"""
+f(a)={f(a_n)}
+f(b)={f(b_n)}
+f(m)={f_m_n}\n
+"""
         if f(a_n)*f_m_n < 0:
             a_n = a_n
             b_n = m_n
@@ -33,12 +45,13 @@ def bisection(a,b,N):
             a_n = m_n
             b_n = b_n
         elif f_m_n == 0:
-            print("Found exact solution.")
-            return m_n
+            mystr+=f"\n*Solucion*= {f_m_n}\n"
+            return mystr
         else:
-            print("Bisection method fails.")
-            return None
-    return (a_n + b_n)/2
+            mystr = "ERROR en metodo biseccion"
+            return mystr
+    mystr+=f"\n *Solucion*: {(a_n + b_n)/2}\n"
+    return mystr
 
 
 def metodoBiseccion(a,b,coefs):

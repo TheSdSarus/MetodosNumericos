@@ -54,13 +54,22 @@ error={current_error}\n\n""")
         i+=1
     
 
+def mainSecanteMetodo(guesses,coefs):
+    global COEFICIENTES
+    COEFICIENTES = coefs
+    str1 = secanteMethod(guesses)
+    return str1
+
 ##PASOS PARA USAR LA FUNCION
 # Los COEFICIENTES DEBES EDITARLOS CON LOS COEFICIENTES ACTUALES
 # LOS DESPUES DE BES PONER INITIAL GUESSES
 # LUEGO PONER COMO PARAMETRO EL MULLER(GUESSES=[x0,x1,x2])
 #luego recoger el str del metodo str1 = muller(guesses)
 if __name__ == "__main__":
-    COEFICIENTES = [1, 2 ,10 , -20]
-    guesses = [2,3]
-    mystr = secanteMethod(guesses)
-    print(mystr)
+    # COEFICIENTES = [1, 2 ,10 , -20]
+    # guesses = [2,3]
+    # mystr = secanteMethod(guesses)
+    # print(mystr)
+    mstr = mainSecanteMetodo([2,3],coefs=[1,2,10,-20])
+    print(mstr)
+    

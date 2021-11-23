@@ -96,5 +96,27 @@ def main():
 	mystr += printMatrix(rootsX,"RootsX",nround=4)
 	print(mystr)
 
+def metodoCholesky(A,B):
+	(lower,upper) = Cholesky_Decomposition(A)
+	rootsX = solveMatrix(lower,upper,B)
+	rootsX = solveMatrix(lower,upper,B)
+	mystr= ""
+	mystr += printMatrix(A,title="Original Matrix",nround=4)
+	mystr += printMatrix(lower,title="Lower Matrix",nround=4)
+	mystr += printMatrix(upper,"Upper Matrix",nround=4)
+	mystr += printMatrix(rootsX,"RootsX",nround=4)
+	return mystr
+
 if __name__ == "__main__":
-	main()
+	matrix = [
+		[6,15,55],
+		[15,55,225],
+		[55,225,979]
+	]
+	B = [
+		[100],
+		[150],
+		[100]
+	]	
+	mstr = metodoCholesky(matrix,B)	
+	print(mstr)

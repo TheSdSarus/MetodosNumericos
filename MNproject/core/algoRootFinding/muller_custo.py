@@ -87,6 +87,12 @@ def muller(guesses):
         maxIter-=1
     return mystr
 
+def metodoMuller(guesses,coefs):
+    global COEFICIENTES
+    COEFICIENTES = coefs
+    mystr = muller(guesses)
+    return mystr
+
 ##PASOS PARA USAR LA FUNCION
 # Los COEFICIENTES DEBES EDITARLOS CON LOS COEFICIENTES ACTUALES
 # LOS DESPUES DE BES PONER INITIAL GUESSES
@@ -96,11 +102,12 @@ if __name__ == "__main__":
     # mystr = main()
     # print(mystr)
     # x**3 + 0 + x**1 + -2
-    COEFICIENTES = [1, 2 ,10 , -20]
-    guesses = [0,1,2]
-    mystr = muller(guesses)
-    print(mystr)
+    # COEFICIENTES = [1, 2 ,10 , -20]
+    # guesses = [0,1,2]
+    # mystr = muller(guesses)
+    # print(mystr)
     #COEFICIENTES = [1,0,1,-2]
     #newF(val=3)
     #x**3 + 2*x**2 + 10*x - 20
-
+    mstr = metodoMuller([0,1,2],[1,2,10,-20])
+    print(mstr)

@@ -58,7 +58,7 @@ def metodoBiseccion(a,b,coefs):
     global COEFICIENTES
     COEFICIENTES = coefs
     middle = bisection(a,b,12)
-    print(middle)
+    return middle
 
 if __name__ == "__main__":
     metodoBiseccion(1,2,[1,-1,-1])

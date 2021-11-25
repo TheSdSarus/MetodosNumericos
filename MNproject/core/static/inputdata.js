@@ -52,6 +52,8 @@ export function getData(){
     sendData();
 }
 function sendData(){
+    let cantVars =document.getElementById("coeficientes").value
+    console.log(cantVars)
     console.log(sendData);
     let variables;
     if(strMethod == "bairstow"){
@@ -80,7 +82,7 @@ function sendData(){
     "&x7="+crossList[7]+
     "&x8="+crossList[8]+
     "&x9="+crossList[9]+
-    sendVars+"";    
+    sendVars+"&cant="+cantVars+"";    
 }
 
 

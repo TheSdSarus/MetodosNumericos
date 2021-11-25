@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Resultado de Matrix</title>
+    {% load static %}
+</head>
+
+<body>
+    <h1>Resultado del Metodo de Descomposicion LU :{{method}} </h1>
+    {% if method %}
+        <section class= "matrix">
+            {% if coefs %}
+            <table>
+                <h1>Matrix Original: </h1>    
+                <tbody>
+                    {% for row in coefs %}
+                        <tr>
+                            {% for item in row %}
+                                <td>{{item}}</td>
+                            {% endfor %}        
+                        </tr>
+                    {% endfor %}
+                </tbody>    
+            </table>
+            {% else %}
+                <p>No existe matriz, no llego aqui :(</p>
+            {% endif %}
+        </section>
+    {% else %}
+
+    {% endif %}
+</html>

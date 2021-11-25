@@ -63,3 +63,6 @@ def metodoBiseccion(a,b,coefs):
 if __name__ == "__main__":
     str1 = metodoBiseccion(1,2,[1,-1,-1])
     print(str1)
+
+
+

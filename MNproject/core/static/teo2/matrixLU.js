@@ -12,14 +12,14 @@ function main(){
 
     if(method == null |
          orderMtrx == null |
-         container ==null |
-         sendDataButton == null){
+         container ==null ){
+        // | sendDataButton == null
         console.log("Error en algun id { metodo, orderMatrix,contenedorMatrix }")
         return;
     }
     method.addEventListener("change",updateMethod);
     orderMtrx.addEventListener("change",createMatrix);
-    sendDataButton.addEventListener("click",sendData);
+    //sendDataButton.addEventListener("click",sendData);
     utilMethod.addEventListener("click",sendData);
 }
 
@@ -28,6 +28,7 @@ function removeAllChildNodes(parent) {
         parent.removeChild(parent.firstChild);
     }
 }
+
 function updateMethod(){
     strMethod = this.value;
     console.log(strMethod);
@@ -57,6 +58,7 @@ function createMatrix(){
     
 }
 function getMatrix(order){
+    console.log("Order : **",order);
     let matrix = [];
     let cont = 0;
     let row;
@@ -81,11 +83,28 @@ function getMatrix(order){
         matrix.push(genRow);
     }
     console.log("matriz: ",matrix);
+    return toRequest(matrix,order)
+}
+function toRequest(matrix,order){
+    let request = ""
+    let count = 0;
+    for(let i = 0; i < order; i++){
+        for(let j = 0; j < order; j++){
+            request += `&x${count}=${matrix[i][j]}`;
+            count++;
+        }
+    }
+
+    return request;    
 }
 function sendData(){
-    getMatrix(3);
-    let request = URL_WEB+"passData/?method="+strMethod;
-    console.log(request);
+    let order = document.getElementById("orderMatrix").value;
+    let requestMatrix = getMatrix(order);
+
+    let request = URL_WEB+"resultLU/?method="+strMethod+requestMatrix+"&order="+order;
+    //console.log(request);
+
+    window.location.href = request;
 }
 
 main();

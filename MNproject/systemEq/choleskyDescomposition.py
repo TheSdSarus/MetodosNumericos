@@ -87,6 +87,7 @@ def main():
 	]
 	mystr= ""
 	(lower,upper) = Cholesky_Decomposition(matrix)
+	
 	# print(lower)
 	# print(upper)
 	rootsX = solveMatrix(lower,upper,B)

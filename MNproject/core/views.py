@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from findRoot import bisection,mn_secantes,muller_custo
+from findRoot import bisection,muller_custo,bairstow
+from systemEq import choleskyDescomposition
 # Create your views here 
 
 def home(request):
@@ -10,6 +11,42 @@ def getData(request):
 
 def matrixLU(request):
     return render(request,"descomposicionLU.html")
+
+#para los LU
+def passDataMatrixLU(request):
+    start = request.GET
+    
+    method = start.get("method")
+    if method:
+        order = start.get("order")
+        if order:
+            coefs = []
+            count = 0
+            for i in range(int(order)):
+                row = []
+                for j in range(int(order)):
+                    key = "x"+str(count)
+                    val = start.get(key)
+                    if val:
+                        row.append(val)                        
+                        pass
+                    else:
+                        print("La key= ",key,"No existe")
+                        break
+                    count+=1
+                coefs.append(row)
+            # print(coefs)
+            context = {
+                "coefs":coefs,
+                "method":method,
+                "order":order
+            }
+            return render(request,"resultMatrixLU.html",context)
+        else:
+            print("Order no llego=",order)
+    else:
+        print("method no llego=",method)  
+    return render(request,"resultMatrixLU.html")      
 
 def passData(request):
     timesConst = {
@@ -49,7 +86,6 @@ def passData(request):
     #         print("No key exist, value is: ", myval,"i=",i)
     #         break
     #     i+=1
-    
 
     # variables
     guesses = []
@@ -84,9 +120,12 @@ def adminMethods(coefs,guesses,method):
         coefs = convertToInt(coefs)
         output = muller_custo.metodoMuller(guesses,coefs)
     elif(method == "bairstow"):
-        guesses = convertToInt(guesses)
+        # guesses = convertToInt(guesses)
         coefs = convertToInt(coefs)
-        output = mn_secantes.mainSecanteMetodo(guesses,coefs)
+        print("Coeficientes: ",coefs)
+        output = bairstow.bairstowMain(coefs)
+    else:
+        output = "El metodo que pusiste no lo soportamos"
     return output
 
 def convertToInt(lista):

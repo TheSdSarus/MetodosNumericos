@@ -8,13 +8,16 @@ var orderMtrx = document.getElementById("orderMatrix");
 var container = document.getElementById("contenedorMatrix");
 var sendDataButton = document.getElementById("sendDataButton");
 var utilMethod = document.getElementById("utilButton");
+var constanteContainer = document.getElementById("matrixConstante");
+
 function main(){
 
     if(method == null |
          orderMtrx == null |
-         container ==null ){
+         container ==null |
+         constanteContainer == null){
         // | sendDataButton == null
-        console.log("Error en algun id { metodo, orderMatrix,contenedorMatrix }")
+        console.log("Error en algun id { metodo, orderMatrix,contenedorMatrix,matrixConstante }")
         return;
     }
     method.addEventListener("change",updateMethod);
@@ -55,8 +58,25 @@ function createMatrix(){
         container.appendChild(minBox);
         cont++;
     }
-    
+    removeAllChildNodes(constanteContainer);
+    cont = 0;
+    while(cont != this.value){
+        let minBox = document.createElement("div");
+        let label = document.createElement("label");
+        let input = document.createElement("input");    
+        input.type = "number";
+        input.maxLength=4;
+        input.size = 3;
+        input.id = "c"+cont;
+        label.textContent = "c"+(cont+1);
+        //concat
+        label.appendChild(input);
+        minBox.appendChild(label);
+        constanteContainer.appendChild(minBox);
+        cont++;    
+    }
 }
+
 function getMatrix(order){
     console.log("Order : **",order);
     let matrix = [];
@@ -85,6 +105,7 @@ function getMatrix(order){
     console.log("matriz: ",matrix);
     return toRequest(matrix,order)
 }
+
 function toRequest(matrix,order){
     let request = ""
     let count = 0;
@@ -94,16 +115,33 @@ function toRequest(matrix,order){
             count++;
         }
     }
-
     return request;    
 }
+function getConstantMatrix(){
+    let constMatrix = [];
+    let order = document.getElementById("orderMatrix").value;
+    for(let i = 0; i < order; ++i){
+        let key = "c"+i;
+        let tag = document.getElementById(key);
+        if(tag != null){
+            constMatrix.push(tag.value);
+        }else{
+            console.log("ERROR: no se recupero ID=",key);
+        }
+    }
+    let constRequest = "";
+    for(let i = 0; i < constMatrix.length; i++){
+        constRequest += `&c${i}=${constMatrix[i]}`;
+    }
+    return constRequest;
+}
 function sendData(){
+    let constReq = getConstantMatrix();
     let order = document.getElementById("orderMatrix").value;
     let requestMatrix = getMatrix(order);
 
-    let request = URL_WEB+"resultLU/?method="+strMethod+requestMatrix+"&order="+order;
+    let request = URL_WEB+"resultLU/?method="+strMethod+requestMatrix+"&order="+order+constReq;
     //console.log(request);
-
     window.location.href = request;
 }
 

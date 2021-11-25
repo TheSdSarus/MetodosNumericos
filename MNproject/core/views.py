@@ -28,6 +28,7 @@ def passDataMatrixLU(request):
                     key = "x"+str(count)
                     val = start.get(key)
                     if val:
+                        val = int(val)
                         row.append(val)                        
                         pass
                     else:
@@ -35,18 +36,34 @@ def passDataMatrixLU(request):
                         break
                     count+=1
                 coefs.append(row)
+            #get constant Matrix
+            constCoefs = []
+            for i in range(int(order)):
+                key ="c"+str(i)
+                val = start.get(key)
+                if(val):
+                    val = int(val)
+                    constCoefs.append([val,])
+                else:
+                    print("No existe la llave: ",key)
+                    break
+            #resolver el admin
+            
+            outputResult = adminMethodsLU(coefs,constCoefs,method)
             # print(coefs)
             context = {
                 "coefs":coefs,
                 "method":method,
-                "order":order
+                "order":order,
+                "constMatrix":constCoefs,
+                "output":outputResult
             }
             return render(request,"resultMatrixLU.html",context)
         else:
             print("Order no llego=",order)
     else:
         print("method no llego=",method)  
-    return render(request,"resultMatrixLU.html")      
+    return render(request,"resultMatrixLU.html")
 
 def passData(request):
     timesConst = {
@@ -126,6 +143,18 @@ def adminMethods(coefs,guesses,method):
         output = bairstow.bairstowMain(coefs)
     else:
         output = "El metodo que pusiste no lo soportamos"
+    return output
+
+def adminMethodsLU(A,B,method):
+    output = ""
+    if(method == "choleski"):
+        output = choleskyDescomposition.metodoCholesky(A,B)
+    elif(method=="gauss"):
+        output = "Aun no soportamos el Metodo Gauss Seidel"
+    elif(method == "crout"):
+        output = "Aun no soportamos el Metodo Crout"
+    else:
+        output = "Este metodo no lo tenemos"
     return output
 
 def convertToInt(lista):

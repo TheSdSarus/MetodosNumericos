@@ -12,6 +12,17 @@
         <section class= "matrix">
             {% if coefs %}
             <table>
+                <tbody>                    
+                    {% for item in constMatrix %}
+                        <tr>
+                            <td> {{item}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+
+            <table>
                 <h1>Matrix Original: </h1>    
                 <tbody>
                     {% for row in coefs %}
@@ -27,6 +38,13 @@
                 <p>No existe matriz, no llego aqui :(</p>
             {% endif %}
         </section>
+        {% if output %}
+        <section class="output">
+            <p  style="white-space: pre-wrap;" >{{output}}</p>
+        </section>
+        {% else %}
+            <p>No encontramos la solucion :(</p>
+        {% endif %}
     {% else %}
 
     {% endif %}

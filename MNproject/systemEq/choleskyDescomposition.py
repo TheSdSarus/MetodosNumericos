@@ -1,4 +1,4 @@
-from utils import printMatrix,solveMatrix
+from .utils import printMatrix,solveMatrix
 import cmath
 import math
 MAX = 100
@@ -30,11 +30,12 @@ def toTranspuesta(matrix):
 			upper[j][i] = matrix[i][j]
 	return upper
 
+str_glob = ""
 
 def Cholesky_Decomposition(matrix):
 	n = len(matrix)
-	str_glob = ""
 	if(isTranspuesta(matrix) == False):
+		global str_glob
 		str_glob = "La matriz no es simetrica"
 		return
 	lower = [[0 for x in range(n )]
@@ -98,7 +99,10 @@ def main():
 	print(mystr)
 
 def metodoCholesky(A,B):
+	if(not isTranspuesta(A)):
+		return "Esta matriz no es simetrica, el metodo Choleski necesita que sea simetrica y positiva"
 	(lower,upper) = Cholesky_Decomposition(A)
+	 
 	rootsX = solveMatrix(lower,upper,B)
 	rootsX = solveMatrix(lower,upper,B)
 	mystr= ""

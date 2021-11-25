@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from algoRootFinding import bisection
+from findRoot import bisection,mn_secantes,muller_custo
 # Create your views here 
 
 def home(request):
@@ -56,9 +56,12 @@ def passData(request):
     for times in range(timesConst[method]):
         guesses.append(start["var"+str(times)])
 
-
-
-
+    output= ""
+    output = adminMethods(coefs=coefs,guesses=guesses,method=method)
+    context = {
+        "output":output,
+        "method":method
+    }
     #my vars
     # print("Variables: ",vars)
 
@@ -67,15 +70,27 @@ def passData(request):
     # print("Methodo",method)
     # print("Coeficientes",coefs)
     # print("Initial Guesses",guesses)
-    return render(request,"passData.html")
+    return render(request,"passData.html",context)
 
 def adminMethods(coefs,guesses,method):
     output = ""
     if(method == "newton"):
-        pass
+        a = int(guesses[0])
+        b = int(guesses[1])
+        coefs = convertToInt(coefs)
+        output = bisection.metodoBiseccion(a,b,coefs)
     elif(method == "muller"):
-        pass
+        guesses = convertToInt(guesses)
+        coefs = convertToInt(coefs)
+        output = muller_custo.metodoMuller(guesses,coefs)
     elif(method == "bairstow"):
-        pass
-    pass
+        guesses = convertToInt(guesses)
+        coefs = convertToInt(coefs)
+        output = mn_secantes.mainSecanteMetodo(guesses,coefs)
+    return output
 
+def convertToInt(lista):
+    data = []
+    for item in lista:
+        data.append(int(item))
+    return data

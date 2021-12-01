@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',#importante!
     'findRoot',
-    'systemEq'
+    'systemEq',
+    "interpolation",
 ]
 
 MIDDLEWARE = [

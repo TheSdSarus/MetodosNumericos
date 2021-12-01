@@ -2,7 +2,6 @@ from django.http.response import HttpResponse
 from django.shortcuts import render,reverse
 from findRoot import bisection,muller_custo,bairstow
 from systemEq import choleskyDescomposition, gaussSeidel
-from systemEq import choleskyDescomposition
 from interpolation import minSquaremetodo
 # Create your views here 
 

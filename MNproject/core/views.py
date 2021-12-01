@@ -125,6 +125,13 @@ def passData(request):
     # print("Initial Guesses",guesses)
     return render(request,"passData.html",context)
 
+
+def inputMinSquare(request):
+    return render(request,"inputMinCuadrados.html")
+
+
+##########################################################################
+# utils methods
 def adminMethods(coefs,guesses,method):
     output = ""
     if(method == "newton"):

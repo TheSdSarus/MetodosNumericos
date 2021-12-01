@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from core.views import home,getData,passData,matrixLU,passDataMatrixLU
+from core.views import *
 # from django.conf import settings
 # from django.conf.urls.static import static
 
@@ -26,4 +26,5 @@ urlpatterns = [
     path("passData/",passData, name="passdata"),
     path("inputLU/", matrixLU, name="inputLU"),
     path("resultLU/",passDataMatrixLU,name="resultLU"),
+    path("inputMSquare/",inputMinSquare,name="inputMinSquare"),
 ] 

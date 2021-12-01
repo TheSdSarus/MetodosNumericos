@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from findRoot import bisection,muller_custo,bairstow
-from systemEq import choleskyDescomposition
+from systemEq import choleskyDescomposition, gaussSeidel
 # Create your views here 
 
 def home(request):
@@ -149,8 +149,9 @@ def adminMethodsLU(A,B,method):
     output = ""
     if(method == "choleski"):
         output = choleskyDescomposition.metodoCholesky(A,B)
+        print("Bla" + output)
     elif(method=="gauss"):
-        output = "Aun no soportamos el Metodo Gauss Seidel"
+        output = gaussSeidel.metodoGaussSeidel(A,B)
     elif(method == "crout"):
         output = "Aun no soportamos el Metodo Crout"
     else:

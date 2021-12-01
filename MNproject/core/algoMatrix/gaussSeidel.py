@@ -1,5 +1,5 @@
 # Gauss Seidel Iteration
-
+'''
 # Defining equations to be solved
 # in diagonally dominant form
 f1 = lambda x,y,z: (17-y+2*z)/20
@@ -37,3 +37,8 @@ while condition:
     condition = e1>e and e2>e and e3>e
 
 print('\nSolution: x=%0.3f, y=%0.3f and z = %0.3f\n'% (x1,y1,z1))
+'''
+
+def metodoGaussSeidel(A,B):
+    print(A)
+    print(B)

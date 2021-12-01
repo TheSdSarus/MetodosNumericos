@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Minimos Cuadrados RESULTADO</title>
+        {% load static %}
+    </head>
+    <body>
+        <h1>Minimos Cuadrados RESULTADO Input</h1>
+        {% if cant %}
+            <h2>Los datos tienen una longitud de {{cant}}</h2>
+            <section class="outputZone">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>X</th>
+                            <th>Y</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if arr %}
+                            {% for item1,item2 in arr %} 
+                                <tr>
+                                    <td>{{item1}}</td>
+                                    <td>{{item2}}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td>
+                                    No hay datos, losiento
+                                </td>
+                            </tr>
+                        {% endif %}   
+                    </tbody>
+                </table>
+                <div id="ZONE_SOLUTION">
+                    <p style="white-space: pre-wrap;"  >{{output}}</p>
+                </div>
+            </section>
+        {% else %}
+        <h2>No llego los datos!!!!</h2>
+        {% endif %}
+    </body>
+ 
+</html>

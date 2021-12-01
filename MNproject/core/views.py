@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.http.response import HttpResponse
+from django.shortcuts import render,reverse
 from findRoot import bisection,muller_custo,bairstow
 from systemEq import choleskyDescomposition
+from interpolation import minSquaremetodo
 # Create your views here 
 
 def home(request):
@@ -127,6 +129,39 @@ def passData(request):
 
 
 def inputMinSquare(request):
+    start = request.GET
+    if start:
+        #retrieve cantidad
+        val = start.get("cant")
+        if not val:
+            return render(request,"inputMinCuadrados.html")    
+        items = int(val)
+        #retrieve X's and Y's
+        arrX = []
+        arrY = []
+        for i in range(int(items)):
+            key_x = "x"+str(i)
+            key_y = "y"+str(i)
+            valX = start.get(key_x)
+            valY = start.get(key_y)
+            if (not valY or not valX):
+                print("ID X",key_x,"ID Y: ",key_y)
+                break
+            arrX.append(valX)
+            arrY.append(valY)
+        arr = zip(arrX, arrY)
+        arX = convertToInt(arrX)
+        arY = convertToInt(arrY)
+        output = "Metodo NO FUNCIONA todavia..."
+        output = interfaceMinSquareMethod(arX,arY)
+        context = {
+            "arr":arr,
+            "cant":items,
+            "output":output,
+        }
+        
+        return render(request,"outputMinCuadrados.html",context)
+
     return render(request,"inputMinCuadrados.html")
 
 
@@ -163,6 +198,9 @@ def adminMethodsLU(A,B,method):
     else:
         output = "Este metodo no lo tenemos"
     return output
+
+def interfaceMinSquareMethod(X,Y):
+    return minSquaremetodo.metodoMinSquare(X,Y)
 
 def convertToInt(lista):
     data = []

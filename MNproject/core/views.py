@@ -2,7 +2,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render,reverse
 from findRoot import bisection,muller_custo,bairstow
 from systemEq import choleskyDescomposition, gaussSeidel
-from interpolation import minSquaremetodo
+from interpolation import minSquaremetodo,newtonDifDiv
 # Create your views here 
 
 def home(request):
@@ -156,12 +156,22 @@ def inputMinSquare(request):
         arY = convertToInt(arrY)
         output = "Metodo NO FUNCIONA todavia..."
         output = adminInterpolation(arX,arY,method)
-        context = {
+        context = {}
+        if( method == "minSquare"):
+            context = {
             "arr":arr,
             "cant":items,
-            "output":output,
+            "output":output["outputStr"],
             "method": method
-        }
+            }
+        elif(method == "difDivididas"):
+            context = {
+            "arr":arr,
+            "cant":items,
+            "output":output["coefs"],
+            "graph":output["graph"],
+            "method": method
+            }        
         
         return render(request,"outputMinCuadrados.html",context)
 
@@ -203,12 +213,13 @@ def adminMethodsLU(A,B,method):
         output = "Este metodo no lo tenemos"
     return output
 def adminInterpolation(X,Y,method):
-    output = ""
+    context = {}
     if(method == "difDivididas"):
-        output = "AUN NO FUNCION ESTE METODO :(, pero I will do it"
+        context = newtonDifDiv.difDivMethod(X,Y)
+        # output = "AUN NO FUNCION ESTE METODO :(, pero I will do it"
     elif(method == "minSquare"):
-        output = interfaceMinSquareMethod(X,Y)
-    return output
+        context = interfaceMinSquareMethod(X,Y) 
+    return context
 
 
 def interfaceMinSquareMethod(X,Y):

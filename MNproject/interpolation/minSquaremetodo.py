@@ -70,7 +70,10 @@ def metodoMinSquare(X,Y):
     mystr =  toStr(tupleAB)
     coefRelation = getCoefRelation(X,Y) 
     mystr+=f"\n Coeficiente de Correlacion: {coefRelation}"           
-    return mystr
+    context = {
+        "outputStr":mystr,
+    }
+    return context
 
 
 if __name__ == "__main__":

@@ -42,6 +42,12 @@
         {% else %}
         <h2>No llego los datos!!!!</h2>
         {% endif %}
+        {% if graph %}
+            {{graph|safe}}
+        {% else %}
+        <h2>Aun no hay graficos</h2>
+        {% endif %}
+
     </body>
  
 </html>

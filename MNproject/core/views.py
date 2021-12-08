@@ -132,6 +132,8 @@ def inputMinSquare(request):
     start = request.GET
     if start:
         #retrieve cantidad
+        method = start["method"]
+        #print("METODO A USAR: ",method)
         val = start.get("cant")
         if not val:
             return render(request,"inputMinCuadrados.html")    
@@ -153,11 +155,12 @@ def inputMinSquare(request):
         arX = convertToInt(arrX)
         arY = convertToInt(arrY)
         output = "Metodo NO FUNCIONA todavia..."
-        output = interfaceMinSquareMethod(arX,arY)
+        output = adminInterpolation(arX,arY,method)
         context = {
             "arr":arr,
             "cant":items,
             "output":output,
+            "method": method
         }
         
         return render(request,"outputMinCuadrados.html",context)
@@ -199,6 +202,14 @@ def adminMethodsLU(A,B,method):
     else:
         output = "Este metodo no lo tenemos"
     return output
+def adminInterpolation(X,Y,method):
+    output = ""
+    if(method == "difDivididas"):
+        output = "AUN NO FUNCION ESTE METODO :(, pero I will do it"
+    elif(method == "minSquare"):
+        output = interfaceMinSquareMethod(X,Y)
+    return output
+
 
 def interfaceMinSquareMethod(X,Y):
     return minSquaremetodo.metodoMinSquare(X,Y)

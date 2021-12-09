@@ -1,7 +1,7 @@
 import numpy as np
-import matplotlib.pyplot as plt
-
-plt.style.use('seaborn-poster')
+# import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+# plt.style.use('seaborn-poster')
 
 # matplotlib inline
 def divided_diff(x, y):
@@ -32,7 +32,7 @@ def newton_poly(coef, x_data, x):
         p = coef[n-k] + (x -x_data[n-k])*p
     return p
 
-import plotly.graph_objects as go
+
 
 def difDivMethod(X,Y):
     coorX = np.array(X)

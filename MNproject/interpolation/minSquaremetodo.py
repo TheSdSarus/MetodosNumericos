@@ -1,6 +1,8 @@
 import cmath
 import functools
+import plotly.graph_objects as go
 
+import numpy as np
 def multiply(a,b):
     return a*b
 
@@ -38,7 +40,7 @@ def getLinealFunc(X,Y):
 
 def toStr(tupleAB):
     str1 = ""
-    if tupleAB[1] > 0:
+    if tupleAB[1] >= 0:
         str1 = f"f(x) = {tupleAB[0]}x + {tupleAB[1]}"
     else:
         str1 = f"f(x) = {tupleAB[0]}x {tupleAB[1]}"    
@@ -65,13 +67,38 @@ def getCoefRelation(X,Y):
         return r
 
 
+def getCoordY(coefs = None,X=[]):
+    y = []
+    # if not X:
+    #     print("No hay abscisas : 'X'")
+    #     return y
+    # if not coefs:
+    #     print("No pusiste el parametro 'coefs'")
+    #     return y
+
+    f = lambda item: coefs[0]*item+coefs[1]
+    
+    for absc in X:
+        y.append(f(absc))
+    return y
+
+
 def metodoMinSquare(X,Y):
     tupleAB = getLinealFunc(X,Y)
+    ##--------------------------
+    newX = np.arange(X[0],X[-1]+0.1,0.1)
+    newY = getCoordY(coefs=list(tupleAB),X=newX)
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=newX, y=newY))
+    graph = fig.to_html(full_html=False, default_height=500, default_width=700)
+    ##--------------------------
     mystr =  toStr(tupleAB)
     coefRelation = getCoefRelation(X,Y) 
-    mystr+=f"\n Coeficiente de Correlacion: {coefRelation}"           
+    mystr+=f"\n Coeficiente de Correlacion: {coefRelation}"
     context = {
         "outputStr":mystr,
+        "graph":graph,
     }
     return context
 

@@ -162,6 +162,7 @@ def inputMinSquare(request):
             "arr":arr,
             "cant":items,
             "output":output["outputStr"],
+            "graph":output["graph"],
             "method": method
             }
         elif(method == "difDivididas"):
@@ -214,16 +215,16 @@ def adminMethodsLU(A,B,method):
     return output
 def adminInterpolation(X,Y,method):
     context = {}
+    X = convertToInt(X)
+    Y = convertToInt(Y)
+    
     if(method == "difDivididas"):
         context = newtonDifDiv.difDivMethod(X,Y)
         # output = "AUN NO FUNCION ESTE METODO :(, pero I will do it"
     elif(method == "minSquare"):
-        context = interfaceMinSquareMethod(X,Y) 
+        context = minSquaremetodo.metodoMinSquare(X,Y)
     return context
 
-
-def interfaceMinSquareMethod(X,Y):
-    return minSquaremetodo.metodoMinSquare(X,Y)
 
 def convertToInt(lista):
     data = []

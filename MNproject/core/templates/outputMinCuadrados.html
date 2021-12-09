@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Minimos Cuadrados RESULTADO</title>
+        <title>Solucion de la Interpolacion</title>
         {% load static %}
     </head>
     <body>
         <h1>Minimos Cuadrados RESULTADO Input</h1>
         {% if cant %}
+            
             <h2>Los datos tienen una longitud de {{cant}}</h2>
+            <h3>Metodo Elegido : {{method}}</h3>
             <section class="outputZone">
                 <table>
                     <thead>
@@ -40,6 +42,12 @@
         {% else %}
         <h2>No llego los datos!!!!</h2>
         {% endif %}
+        {% if graph %}
+            {{graph|safe}}
+        {% else %}
+        <h2>Aun no hay graficos</h2>
+        {% endif %}
+
     </body>
  
 </html>

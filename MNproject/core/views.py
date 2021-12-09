@@ -2,7 +2,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render,reverse
 from findRoot import bisection,muller_custo,bairstow
 from systemEq import choleskyDescomposition, gaussSeidel
-from interpolation import minSquaremetodo
+from interpolation import minSquaremetodo,newtonDifDiv
 # Create your views here 
 
 def home(request):
@@ -132,6 +132,8 @@ def inputMinSquare(request):
     start = request.GET
     if start:
         #retrieve cantidad
+        method = start["method"]
+        #print("METODO A USAR: ",method)
         val = start.get("cant")
         if not val:
             return render(request,"inputMinCuadrados.html")    
@@ -153,12 +155,24 @@ def inputMinSquare(request):
         arX = convertToInt(arrX)
         arY = convertToInt(arrY)
         output = "Metodo NO FUNCIONA todavia..."
-        output = interfaceMinSquareMethod(arX,arY)
-        context = {
+        output = adminInterpolation(arX,arY,method)
+        context = {}
+        if( method == "minSquare"):
+            context = {
             "arr":arr,
             "cant":items,
-            "output":output,
-        }
+            "output":output["outputStr"],
+            "graph":output["graph"],
+            "method": method
+            }
+        elif(method == "difDivididas"):
+            context = {
+            "arr":arr,
+            "cant":items,
+            "output":output["coefs"],
+            "graph":output["graph"],
+            "method": method
+            }        
         
         return render(request,"outputMinCuadrados.html",context)
 
@@ -199,9 +213,18 @@ def adminMethodsLU(A,B,method):
     else:
         output = "Este metodo no lo tenemos"
     return output
+def adminInterpolation(X,Y,method):
+    context = {}
+    X = convertToInt(X)
+    Y = convertToInt(Y)
+    
+    if(method == "difDivididas"):
+        context = newtonDifDiv.difDivMethod(X,Y)
+        # output = "AUN NO FUNCION ESTE METODO :(, pero I will do it"
+    elif(method == "minSquare"):
+        context = minSquaremetodo.metodoMinSquare(X,Y)
+    return context
 
-def interfaceMinSquareMethod(X,Y):
-    return minSquaremetodo.metodoMinSquare(X,Y)
 
 def convertToInt(lista):
     data = []

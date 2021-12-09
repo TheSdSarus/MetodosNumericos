@@ -1,16 +1,22 @@
 
+var method = document.getElementById("method");
 var objNumber = document.getElementById("inputRows");
 var sendButton = document.getElementById("sendButton");
+var selectMethod;
 const URL_WEB = "http://127.0.0.1:8000/";
 function main(){
-    if(objNumber == null|sendButton==null){
-        console.error("No hay el tag con ID: inputRows or ID:sendButton");
+    if(objNumber == null|sendButton==null|method == null){
+        console.error("No hay el tag con ID: inputRows or ID:sendButton, ID:method");
         return;
-    }
+    }    
+    method.addEventListener("change",updateVal);
     objNumber.addEventListener("change",makeInputs);
     sendButton.addEventListener("click",sendData);
 }
-
+function updateVal(){
+    selectMethod = this.value;
+    console.log("METODO; ",selectMethod);
+}
 function makeInputs(){
     let val = this.value;    
     // console.log("Valor");
@@ -88,13 +94,19 @@ function sendData(){
     //SENDDATA
 }
 function sendData_request(arrX,arrY){
+    let selectedmethod = method.value;
     let request = URL_WEB+"inputMSquare/?";
     let items =parseInt(objNumber.value);
+    if(isNaN(items)){
+        console.log(selectedmethod);
+        return;
+    }
     for(let i = 0; i < items; i++){
         request +="&x"+i+"="+arrX[i];
         request +="&y"+i+"="+arrY[i];
     }
     request += "&cant="+items;
+    request+="&method="+selectedmethod;
     window.location.href = request;
 }
 

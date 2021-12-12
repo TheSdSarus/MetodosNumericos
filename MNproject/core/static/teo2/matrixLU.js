@@ -1,3 +1,5 @@
+import { readAndParseJson } from "@angular/cli/utilities/json-file";
+
 // import { removeAllChildNodes } from "../inputdata.js";
 const URL_WEB = "http://127.0.0.1:8000/";
 console.log("HELLOS WORLD!");
@@ -60,6 +62,7 @@ function createMatrix(){
     }
     removeAllChildNodes(constanteContainer);
     cont = 0;
+    
     while(cont != this.value){
         let minBox = document.createElement("div");
         let label = document.createElement("label");

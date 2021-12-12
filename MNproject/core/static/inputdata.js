@@ -70,8 +70,9 @@ function sendData(){
 
     let sendVars = getVariables(variables);
     console.log(sendVars);
-
-    window.location.href = URL_WEB+"passData/?method=" + strMethod+ 
+    //window.location.href
+    
+    window.location.href =  URL_WEB+"passData/?method=" + strMethod+ 
     "&x0="+crossList[0]+
     "&x1="+crossList[1]+
     "&x2="+crossList[2]+
@@ -83,6 +84,8 @@ function sendData(){
     "&x8="+crossList[8]+
     "&x9="+crossList[9]+
     sendVars+"&cant="+cantVars+"";    
+
+    print(crossList[9])
 }
 
 

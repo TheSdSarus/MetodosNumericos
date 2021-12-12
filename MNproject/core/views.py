@@ -75,8 +75,8 @@ def passDataMatrixLU(request):
 
 def passData(request):
     timesConst = {
-        "bairstow": 0,
-        "muller": 3,
+        "bairstow": 0,#0 variables
+        "muller": 3,# 3 variables
         "newton": 2  # bisseccion
     }
     start = request.GET
@@ -85,7 +85,6 @@ def passData(request):
         try:
             cantVars = start["cant"]
             method = start["method"]
-            cantVars = start["cant"]
         except:
             print("Value Error error a [cant, method, cant]")
         
@@ -117,7 +116,7 @@ def passData(request):
         # variables
         guesses = []
         for times in range(timesConst[method]):
-            guesses.append(start["var"+str(times)])
+            guesses.append(start.get("var"+str(times)))
 
         output= ""
         output = adminMethods(coefs=coefs,guesses=guesses,method=method)

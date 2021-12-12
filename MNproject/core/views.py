@@ -1,23 +1,28 @@
 from django.http.response import HttpResponse
-from django.shortcuts import render,reverse
-from findRoot import bisection,muller_custo,bairstow
+from django.shortcuts import render, reverse
+from findRoot import bisection, muller_custo, bairstow
 from systemEq import choleskyDescomposition, gaussSeidel
-from interpolation import minSquaremetodo,newtonDifDiv
-# Create your views here 
+from interpolation import minSquaremetodo, newtonDifDiv, Lagrange
+# Create your views here
+
 
 def home(request):
-    return render(request,"home.html")
+    return render(request, "home.html")
+
 
 def getData(request):
-    return render(request,"inputData.html")
+    return render(request, "inputData.html")
+
 
 def matrixLU(request):
-    return render(request,"descomposicionLU.html")
+    return render(request, "descomposicionLU.html")
 
-#para los LU
+# para los LU
+
+
 def passDataMatrixLU(request):
     start = request.GET
-    
+
     method = start.get("method")
     if method:
         order = start.get("order")
@@ -31,47 +36,48 @@ def passDataMatrixLU(request):
                     val = start.get(key)
                     if val:
                         val = int(val)
-                        row.append(val)                        
+                        row.append(val)
                         pass
                     else:
-                        print("La key= ",key,"No existe")
+                        print("La key= ", key, "No existe")
                         break
-                    count+=1
+                    count += 1
                 coefs.append(row)
-            #get constant Matrix
+            # get constant Matrix
             constCoefs = []
             for i in range(int(order)):
-                key ="c"+str(i)
+                key = "c"+str(i)
                 val = start.get(key)
                 if(val):
                     val = int(val)
-                    constCoefs.append([val,])
+                    constCoefs.append([val, ])
                 else:
-                    print("No existe la llave: ",key)
+                    print("No existe la llave: ", key)
                     break
-            #resolver el admin
-            
-            outputResult = adminMethodsLU(coefs,constCoefs,method)
+            # resolver el admin
+
+            outputResult = adminMethodsLU(coefs, constCoefs, method)
             # print(coefs)
             context = {
-                "coefs":coefs,
-                "method":method,
-                "order":order,
-                "constMatrix":constCoefs,
-                "output":outputResult
+                "coefs": coefs,
+                "method": method,
+                "order": order,
+                "constMatrix": constCoefs,
+                "output": outputResult
             }
-            return render(request,"resultMatrixLU.html",context)
+            return render(request, "resultMatrixLU.html", context)
         else:
-            print("Order no llego=",order)
+            print("Order no llego=", order)
     else:
-        print("method no llego=",method)  
-    return render(request,"resultMatrixLU.html")
+        print("method no llego=", method)
+    return render(request, "resultMatrixLU.html")
+
 
 def passData(request):
     timesConst = {
-        "bairstow":0,
-        "muller":3,
-        "newton":2#bisseccion
+        "bairstow": 0,
+        "muller": 3,
+        "newton": 2  # bisseccion
     }
     start = request.GET
     if start:
@@ -134,14 +140,14 @@ def passData(request):
 def inputMinSquare(request):
     start = request.GET
     if start:
-        #retrieve cantidad
+        # retrieve cantidad
         method = start["method"]
         #print("METODO A USAR: ",method)
         val = start.get("cant")
         if not val:
-            return render(request,"inputMinCuadrados.html")    
+            return render(request, "inputMinCuadrados.html")
         items = int(val)
-        #retrieve X's and Y's
+        # retrieve X's and Y's
         arrX = []
         arrY = []
         for i in range(int(items)):
@@ -150,7 +156,7 @@ def inputMinSquare(request):
             valX = start.get(key_x)
             valY = start.get(key_y)
             if (not valY or not valX):
-                print("ID X",key_x,"ID Y: ",key_y)
+                print("ID X", key_x, "ID Y: ", key_y)
                 break
             arrX.append(valX)
             arrY.append(valY)
@@ -158,74 +164,87 @@ def inputMinSquare(request):
         arX = convertToInt(arrX)
         arY = convertToInt(arrY)
         output = "Metodo NO FUNCIONA todavia..."
-        output = adminInterpolation(arX,arY,method)
+        output = adminInterpolation(arX, arY, method)
         context = {}
-        if( method == "minSquare"):
+        if(method == "minSquare"):
             context = {
-            "arr":arr,
-            "cant":items,
-            "output":output["outputStr"],
-            "graph":output["graph"],
-            "method": method
+                "arr": arr,
+                "cant": items,
+                "output": output["outputStr"],
+                "graph": output["graph"],
+                "method": method
             }
         elif(method == "difDivididas"):
             context = {
-            "arr":arr,
-            "cant":items,
-            "output":output["coefs"],
-            "graph":output["graph"],
-            "method": method
-            }        
-        
-        return render(request,"outputMinCuadrados.html",context)
+                "arr": arr,
+                "cant": items,
+                "output": output["coefs"],
+                "graph": output["graph"],
+                "method": method
+            }
+        elif(method == "lagra"):
+            context = {
+                "arr": arr,
+                "cant": items,
+                "output": output["outputStr"],
+                "graph": output["graph"],
+                "method": "Lagrange"
+            }
 
-    return render(request,"inputMinCuadrados.html")
+        return render(request, "outputMinCuadrados.html", context)
+
+    return render(request, "inputMinCuadrados.html")
 
 
 ##########################################################################
 # utils methods
-def adminMethods(coefs,guesses,method):
+def adminMethods(coefs, guesses, method):
     output = ""
     if(method == "newton"):
         a = int(guesses[0])
         b = int(guesses[1])
         coefs = convertToInt(coefs)
-        output = bisection.metodoBiseccion(a,b,coefs)
+        output = bisection.metodoBiseccion(a, b, coefs)
     elif(method == "muller"):
         guesses = convertToInt(guesses)
         coefs = convertToInt(coefs)
-        output = muller_custo.metodoMuller(guesses,coefs)
+        output = muller_custo.metodoMuller(guesses, coefs)
     elif(method == "bairstow"):
         # guesses = convertToInt(guesses)
         coefs = convertToInt(coefs)
-        print("Coeficientes: ",coefs)
+        print("Coeficientes: ", coefs)
         output = bairstow.bairstowMain(coefs)
     else:
         output = "El metodo que pusiste no lo soportamos"
     return output
 
-def adminMethodsLU(A,B,method):
+
+def adminMethodsLU(A, B, method):
     output = ""
     if(method == "choleski"):
-        output = choleskyDescomposition.metodoCholesky(A,B)
+        output = choleskyDescomposition.metodoCholesky(A, B)
         print("Bla" + output)
-    elif(method=="gauss"):
-        output = gaussSeidel.metodoGaussSeidel(A,B)
+    elif(method == "gauss"):
+        output = gaussSeidel.metodoGaussSeidel(A, B)
     elif(method == "crout"):
         output = "Aun no soportamos el Metodo Crout"
     else:
         output = "Este metodo no lo tenemos"
     return output
-def adminInterpolation(X,Y,method):
+
+
+def adminInterpolation(X, Y, method):
     context = {}
     X = convertToInt(X)
     Y = convertToInt(Y)
-    
+
     if(method == "difDivididas"):
-        context = newtonDifDiv.difDivMethod(X,Y)
+        context = newtonDifDiv.difDivMethod(X, Y)
         # output = "AUN NO FUNCION ESTE METODO :(, pero I will do it"
     elif(method == "minSquare"):
-        context = minSquaremetodo.metodoMinSquare(X,Y)
+        context = minSquaremetodo.metodoMinSquare(X, Y)
+    elif(method == "lagra"):
+        context = Lagrange.LagrangeMethod(X, Y)
     return context
 
 

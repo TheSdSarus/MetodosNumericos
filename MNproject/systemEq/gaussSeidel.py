@@ -59,11 +59,10 @@ def matrix(matrix,title="Matrix <Nombre>",nround=None):
     if(nround):
         for i in range(len(matrix)):
             str1 += f"{round(matrix[i].real,nround)}\t"
-            str1+="\n"
     else:
         for i in range(len(matrix)):
             str1 += f"{matrix[i].real}\t"
-            str1+="\n"
+    str1+="\n"
     return str1
 
 def m1(B):

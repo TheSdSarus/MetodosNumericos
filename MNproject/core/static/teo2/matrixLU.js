@@ -102,6 +102,8 @@ function funMat(tam) {
 function createMatrix() {
     let order = this.value * this.value;//3x3,2x2
     funMat(this.value);
+    removeAllChildNodes(container);
+    removeAllChildNodes(constanteContainer);
     /*
     removeAllChildNodes(container);
     let cont = 0;

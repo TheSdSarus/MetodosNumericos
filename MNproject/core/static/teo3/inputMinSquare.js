@@ -17,11 +17,73 @@ function updateVal(){
     selectMethod = this.value;
     console.log("METODO; ",selectMethod);
 }
+function funMat(tam) {
+    console.log("hola");
+    var table = "<table id='answere1'>";
+
+    let h = 0;
+    let l = 0;
+    table += '<tr>';
+    table += '<th>';
+    table += 'x';
+    table += '</th>';
+    table += '<th>';
+    table += 'y';
+    table += '</th>';
+    table += '</tr>';
+
+
+    for (let i = 0; i < tam; i++) {
+        table += '<tr>';
+        table += '<td>';
+        table += '<input type="number" maxlength="3" size="3" id="x' + h + '" style="width : 100px;" ></input>'
+        table += '</td>';
+        table += '<td>';
+        table += '<input type="number" maxlength="3" size="3" id="y' + h + '" style="width : 100px;" ></input>'
+        table += '</td>';
+        h++;
+        table += '</tr>';
+    }
+
+    table += "</table>";
+
+    /*
+
+    for(key in row){
+        table += '<th>';
+        table += key;
+        table += '</th>';
+    }
+    table += '</tr>';
+    for(var i in datos){
+        table += '<tr>';
+        row = datos[i];
+        for(key in row){
+            table += '<td>';
+            table += row[key];
+            table += '</td>';
+        }
+        table += '</tr>';
+    }
+    table += "</table>";
+    */
+    console.log(table)
+    document.getElementById("answere1").innerHTML = table;
+}
+
+
+
 function makeInputs(){
-    let val = this.value;    
-    // console.log("Valor");
-    //PARA LAS X
+    let val = this.value;
+
     let inputX = document.getElementById("inputsX");
+    removeAllChildNodes(inputX);
+    let inputY = document.getElementById("inputsY");
+    removeAllChildNodes(inputY);
+    funMat(val);
+    console.log("Valor");
+    //PARA LAS X
+    /*
     removeAllChildNodes(inputX);
     for(let i = 0; i < parseInt(val); i++){
         let label = document.createElement("label");
@@ -48,6 +110,7 @@ function makeInputs(){
         label.append(inputNumber);
         inputY.append(box);
     }
+    */
 }
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {

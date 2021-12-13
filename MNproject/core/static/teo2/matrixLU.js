@@ -11,20 +11,20 @@ var sendDataButton = document.getElementById("sendDataButton");
 var utilMethod = document.getElementById("utilButton");
 var constanteContainer = document.getElementById("matrixConstante");
 
-function main(){
+function main() {
 
-    if(method == null |
-         orderMtrx == null |
-         container ==null |
-         constanteContainer == null){
+    if (method == null |
+        orderMtrx == null |
+        container == null |
+        constanteContainer == null) {
         // | sendDataButton == null
         console.log("Error en algun id { metodo, orderMatrix,contenedorMatrix,matrixConstante }")
         return;
     }
-    method.addEventListener("change",updateMethod);
-    orderMtrx.addEventListener("change",createMatrix);
+    method.addEventListener("change", updateMethod);
+    orderMtrx.addEventListener("change", createMatrix);
     //sendDataButton.addEventListener("click",sendData);
-    utilMethod.addEventListener("click",sendData);
+    utilMethod.addEventListener("click", sendData);
 }
 
 function removeAllChildNodes(parent) {
@@ -33,17 +33,82 @@ function removeAllChildNodes(parent) {
     }
 }
 
-function updateMethod(){
+function updateMethod() {
     strMethod = this.value;
     console.log(strMethod);
 }
 
-function createMatrix(){
-    let order = this.value*this.value;//3x3,2x2
+function funMat(tam) {
+    var table = "<table id='answere1'>";
+
+    let h = 0;
+    let l = 0;
+
+    for (let i = 0; i < tam; i++) {
+        table += '<tr>';
+        for (let j = 0; j < tam; j++) {
+            table += '<td>';
+            table += '<div>';
+            table += '<label>';
+            table += '<input type="number" maxlength="3" size="3" id="x' + h + '" style="width : 100px;" ></input>'
+            table += '</label>';
+            table += '</div>';
+            table += '</td>';
+            h++;
+        }
+
+        table += '<td>';
+        table += '<div>';
+        table += '='
+        table += '</div>';
+        table += '</td>';
+
+        table += '<td>';
+        table += '<div>';
+        table += '<input type="number" maxlength="3" size="3" id="c' + l + '" style="width : 100px;" ></input>'
+        table += '</div>';
+        table += '</td>';
+        l++;
+
+        table += '</tr>';
+    }
+
+    table += "</table>";
+
+    /*
+
+    for(key in row){
+        table += '<th>';
+        table += key;
+        table += '</th>';
+    }
+    table += '</tr>';
+    for(var i in datos){
+        table += '<tr>';
+        row = datos[i];
+        for(key in row){
+            table += '<td>';
+            table += row[key];
+            table += '</td>';
+        }
+        table += '</tr>';
+    }
+    table += "</table>";
+    */
+    console.log(table)
+    document.getElementById("answere1").innerHTML = table;
+}
+
+
+function createMatrix() {
+    let order = this.value * this.value;//3x3,2x2
+    funMat(this.value);
+    removeAllChildNodes(container);
+    removeAllChildNodes(constanteContainer);
+    /*
     removeAllChildNodes(container);
     let cont = 0;
     while( cont != order){
-
         let minBox = document.createElement("div");
         let label = document.createElement("label");
         let input = document.createElement("input");
@@ -76,26 +141,27 @@ function createMatrix(){
         minBox.appendChild(label);
         constanteContainer.appendChild(minBox);
         cont++;    
-    }
+    }*/
+    
 }
 
-function getMatrix(order){
-    console.log("Order : **",order);
+function getMatrix(order) {
+    console.log("Order : **", order);
     let matrix = [];
     let cont = 0;
     let row;
     let col;
-    for(row = 0; row < order; row++){
+    for (row = 0; row < order; row++) {
         let genRow = [];
-        for(col = 0; col < order; col++){
-            let item = document.getElementById("x"+cont);
+        for (col = 0; col < order; col++) {
+            let item = document.getElementById("x" + cont);
             let val;
-            if(item == null){
-                console.log("I dont found ID","x"+cont);
+            if (item == null) {
+                console.log("I dont found ID", "x" + cont);
             }
-            if(item.value == ""){
+            if (item.value == "") {
                 val = "0";
-            }else{
+            } else {
                 val = item.value;
             }
 
@@ -104,45 +170,45 @@ function getMatrix(order){
         }
         matrix.push(genRow);
     }
-    console.log("matriz: ",matrix);
-    return toRequest(matrix,order)
+    console.log("matriz: ", matrix);
+    return toRequest(matrix, order)
 }
 
-function toRequest(matrix,order){
+function toRequest(matrix, order) {
     let request = ""
     let count = 0;
-    for(let i = 0; i < order; i++){
-        for(let j = 0; j < order; j++){
+    for (let i = 0; i < order; i++) {
+        for (let j = 0; j < order; j++) {
             request += `&x${count}=${matrix[i][j]}`;
             count++;
         }
     }
-    return request;    
+    return request;
 }
-function getConstantMatrix(){
+function getConstantMatrix() {
     let constMatrix = [];
     let order = document.getElementById("orderMatrix").value;
-    for(let i = 0; i < order; ++i){
-        let key = "c"+i;
+    for (let i = 0; i < order; ++i) {
+        let key = "c" + i;
         let tag = document.getElementById(key);
-        if(tag != null){
+        if (tag != null) {
             constMatrix.push(tag.value);
-        }else{
-            console.log("ERROR: no se recupero ID=",key);
+        } else {
+            console.log("ERROR: no se recupero ID=", key);
         }
     }
     let constRequest = "";
-    for(let i = 0; i < constMatrix.length; i++){
+    for (let i = 0; i < constMatrix.length; i++) {
         constRequest += `&c${i}=${constMatrix[i]}`;
     }
     return constRequest;
 }
-function sendData(){
+function sendData() {
     let constReq = getConstantMatrix();
     let order = document.getElementById("orderMatrix").value;
     let requestMatrix = getMatrix(order);
 
-    let request = URL_WEB+"resultLU/?method="+strMethod+requestMatrix+"&order="+order+constReq;
+    let request = URL_WEB + "resultLU/?method=" + strMethod + requestMatrix + "&order=" + order + constReq;
     //console.log(request);
     window.location.href = request;
 }

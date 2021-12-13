@@ -45,7 +45,7 @@ f(m)={f_m_n}\n
             a_n = m_n
             b_n = b_n
         elif f_m_n == 0:
-            mystr+=f"\n*Solucion*= {f_m_n}\n"
+            mystr+=f"\n*Solucion*= {m_n}\n"
             return mystr
         else:
             mystr = "ERROR en metodo biseccion"
@@ -61,7 +61,7 @@ def metodoBiseccion(a,b,coefs):
     return middle
 
 if __name__ == "__main__":
-    str1 = metodoBiseccion(1,2,[1,-1,-1])
+    str1 = metodoBiseccion(0,2,[1,0,-1])
     print(str1)
 
 

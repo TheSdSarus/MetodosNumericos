@@ -52,15 +52,16 @@ export function getData(){
     sendData();
 }
 function sendData(){
-    let cantVars =document.getElementById("coeficientes").value
-    console.log(cantVars)
-    console.log(sendData);
-    let variables;
-    if(strMethod == "bairstow"){
+    let cantVars =document.getElementById("coeficientes").value;
+    let strMethodValue = document.getElementById("method").value;
+    console.log(cantVars);
+    //console.log(sendData);
+    let variables=0;
+    if(strMethodValue == "bairstow"){
         variables = 0;
-    }else if(strMethod == "muller"){
+    }else if(strMethodValue == "muller"){
         variables = 3;
-    }else if(strMethod=="newton"){
+    }else if(strMethodValue=="newton"){
         variables = 2;
     }else{
         variables = -1;
@@ -69,7 +70,7 @@ function sendData(){
     }
 
     let sendVars = getVariables(variables);
-    console.log(sendVars);
+    //console.log("sendvars:",sendVars);
 
     window.location.href = URL_WEB+"passData/?method=" + strMethod+ 
     "&x0="+crossList[0]+
@@ -83,6 +84,8 @@ function sendData(){
     "&x8="+crossList[8]+
     "&x9="+crossList[9]+
     sendVars+"&cant="+cantVars+"";    
+
+    print(crossList[9])
 }
 
 
@@ -111,7 +114,7 @@ export function removeAllChildNodes(parent) {
 }
 
 function accion() {
-    value = document.getElementById("coeficientes").value;
+    value = document.getElementById("coeficientes").value;//3
     let x0,x1,x2,x3,x4,x5,x6,x7,x8,x9;
     for(let i = 0; i < value; i++) {
         if(i==0){

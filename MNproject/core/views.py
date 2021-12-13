@@ -1,8 +1,9 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render, reverse
 from findRoot import bisection, muller_custo, bairstow
-from systemEq import choleskyDescomposition, gaussSeidel
+from systemEq import choleskyDescomposition, gaussSeidel,crout
 from interpolation import minSquaremetodo, newtonDifDiv, Lagrange
+
 # Create your views here
 
 
@@ -35,7 +36,7 @@ def passDataMatrixLU(request):
                     key = "x"+str(count)
                     val = start.get(key)
                     if val:
-                        val = int(val)
+                        val = float(val)
                         row.append(val)
                         pass
                     else:
@@ -49,7 +50,7 @@ def passDataMatrixLU(request):
                 key = "c"+str(i)
                 val = start.get(key)
                 if(val):
-                    val = int(val)
+                    val = float(val)
                     constCoefs.append([val, ])
                 else:
                     print("No existe la llave: ", key)
@@ -75,63 +76,65 @@ def passDataMatrixLU(request):
 
 def passData(request):
     timesConst = {
-        "bairstow": 0,
-        "muller": 3,
+        "bairstow": 0,#0 variables
+        "muller": 3,# 3 variables
         "newton": 2  # bisseccion
     }
     start = request.GET
-    try:
-        cantVars = start["cant"]
-        method = start["method"]
-        cantVars = start["cant"]
-    except:
-        print("Value Error error a [cant, method, cant]")
+    if start:
+        pass
+        try:
+            cantVars = start["cant"]
+            method = start["method"]
+        except:
+            print("Value Error error a [cant, method, cant]")
+        
+        # print(start)
+        coefs = []
+        # i = 0
+        for j in range(int(cantVars)):
+            key = "x"+str(j)
+            myval = start.get(key)
+            if(myval):
+                coefs.append(myval)
+            else:
+                print("No exist this key: ",key)
 
-    # print(start)
-    coefs = []
-    # i = 0
-    for j in range(int(cantVars)):
-        key = "x"+str(j)
-        myval = start.get(key)
-        if(myval):
-            coefs.append(myval)
-        else:
-            print("No exist this key: ", key)
+        # for val in start.values():
+        #     key = "x"+str(i)
+        #     myval = start.get(key)
+        #     if myval:
+        #         try:
+        #             office = int(myval)
+        #         except:
+        #             office = 0
+        #         coefs.append(office)
+        #     else:
+        #         print("No key exist, value is: ", myval,"i=",i)
+        #         break
+        #     i+=1
 
-    # for val in start.values():
-    #     key = "x"+str(i)
-    #     myval = start.get(key)
-    #     if myval:
-    #         try:
-    #             office = int(myval)
-    #         except:
-    #             office = 0
-    #         coefs.append(office)
-    #     else:
-    #         print("No key exist, value is: ", myval,"i=",i)
-    #         break
-    #     i+=1
+        # variables
+        guesses = []
+        for times in range(timesConst[method]):
+            guesses.append(start.get("var"+str(times)))
 
-    # variables
-    guesses = []
-    for times in range(timesConst[method]):
-        guesses.append(start["var"+str(times)])
+        output= ""
+        output = adminMethods(coefs=coefs,guesses=guesses,method=method)
+        context = {
+            "output":output,
+            "method":method
+        }
+        #my vars
+        # print("Variables: ",vars)
 
-    output = ""
-    output = adminMethods(coefs=coefs, guesses=guesses, method=method)
-    context = {
-        "output": output,
-        "method": method
-    }
-    # my vars
-    # print("Variables: ",vars)
-
-    # hacer el metodo correspondiente
-    # print("Cantidad de bariables: ",cantVars)
-    # print("Methodo",method)
-    # print("Coeficientes",coefs)
-    # print("Initial Guesses",guesses)
-    return render(request, "passData.html", context)
+        # hacer el metodo correspondiente
+        # print("Cantidad de bariables: ",cantVars)
+        # print("Methodo",method)
+        # print("Coeficientes",coefs)
+        # print("Initial Guesses",guesses)
+        return render(request,"passData.html",context)
+    return render(request,"passData.html")
 
 
 def inputMinSquare(request):
@@ -215,7 +218,6 @@ def adminMethods(coefs, guesses, method):
         output = "El metodo que pusiste no lo soportamos"
     return output
 
-
 def adminMethodsLU(A, B, method):
     output = ""
     if(method == "choleski"):
@@ -224,11 +226,10 @@ def adminMethodsLU(A, B, method):
     elif(method == "gauss"):
         output = gaussSeidel.metodoGaussSeidel(A, B)
     elif(method == "crout"):
-        output = "Aun no soportamos el Metodo Crout"
+        output = crout.croutMetodo(A,B)
     else:
         output = "Este metodo no lo tenemos"
     return output
-
 
 def adminInterpolation(X, Y, method):
     context = {}

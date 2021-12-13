@@ -8,15 +8,17 @@
         //aqui se llamaran a los archivos que haran logica de js
     </script>
     <body>
-        <h3>Aqui se pasaran los datos</h3>
-
+        <h3>Resultados:</h3>
+        {% if method %}
         <section>
             <h2>Solucion, por el metodo {{method}}</h2>
             <section class="resolucion">
                 <p style="white-space: pre-wrap;"> {{output}} </p>
             </section>
         </section>
-
+        {% else %}
+            <p>Lo sentimos los datos no llegaron aqui</p>
+        {% endif %}
 
 
 

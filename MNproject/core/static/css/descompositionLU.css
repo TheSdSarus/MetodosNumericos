@@ -6,18 +6,18 @@ body {
 
 
 .container{
-/*    border: 1px red solid;
-*/    display: flex;
+/*    /*border: 1px red solid;*/
+    display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 40px;
 }
 .container .inputData{
-    border: 1px red solid;
+    /*border: 1px red solid;*/
 }
 
 .container .inputData .formGroup{
-    border: 1px red solid;
+    /*border: 1px red solid;*/
     padding: 20px 0px;
 }
   
@@ -37,7 +37,7 @@ body {
 
 
 .container .result{
-   border: 1px red solid;
+   /*border: 1px red solid;*/
 }
     
 

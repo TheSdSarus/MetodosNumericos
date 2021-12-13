@@ -22,10 +22,6 @@ def divided_diff(x, y):
     return coef
 
 def newton_poly(coef, x_data, x):
-    '''
-    evaluate the newton polynomial 
-    at x
-    '''
     n = len(x_data) - 1 
     p = coef[n]
     for k in range(1,n+1):

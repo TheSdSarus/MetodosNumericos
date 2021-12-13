@@ -59,9 +59,11 @@ def getData(request):
 
         output= ""
         output = adminMethods(coefs=coefs,guesses=guesses,method=method)
+        wrapperGraph = getGraph(coefs)
         context = {
             "output":output,
-            "method":method
+            "method":method,
+            "graph": wrapperGraph["graph"],
         }
         #my vars
         # print("Variables: ",vars)
@@ -363,3 +365,29 @@ def convertToInt(lista):
     for item in lista:
         data.append(float(item))
     return data
+
+#x**3 + 2*x**2 + 10*x - 20
+def newF(val=0,coefs=None):
+    result = 0
+    n = len(coefs)
+    for grado in range(n):
+        result += coefs[grado] * val**(n - grado -1)
+    return result 
+import plotly.graph_objects as go
+
+def getGraph(coefs):
+    coefs = convertToInt(coefs)
+    fig = go.Figure()
+    x = []
+    for i in range(-5,6):
+        x.append(i)
+    y = []
+    for item in x:
+        y.append(newF(val=item,coefs=coefs))
+    fig.add_trace(go.Scatter(x=x, y=y))
+    graph = fig.to_html(full_html=False, default_height=500, default_width=700)
+    context = {
+        "graph":graph,
+    }
+    return context
+

@@ -75,7 +75,7 @@ section{
 # Header
 --------------------------------------------------------------*/
 
-#header {
+.header {
   height: 80px;
   transition: all 0.5s;
   z-index: 997;
@@ -85,13 +85,13 @@ section{
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.3);
 }
 
-#header.header-scrolled,
-#header.header-pages {
+.header .header-scrolled,
+.header .header-pages {
   height: 60px;
   padding: 10px 0;
 }
 
-#header .logo h1 {
+.header .logo h1 {
   font-size: 30px;
   margin-left: 10px;
   padding: 5px;
@@ -101,13 +101,13 @@ section{
   text-transform: uppercase;
 }
 
-#header .logo h1 a,
-#header .logo h1 a:hover {
+.header .logo h1 a,
+.header .logo h1 a:hover {
   color: #166f00;
   text-decoration: none;
 }
 
-#header .logo img {
+.header .logo img {
   margin: 0px 10px 0px 0px;
   max-height: 35px;
 }

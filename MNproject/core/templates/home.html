@@ -28,15 +28,18 @@
     <!--==========================
   BARRA DE NAVEGACION
   ============================-->
-    <header id=" header" class="fixed-top">
-    <div class="container">
+    <header id=" header" class="fixed-top" >
+    <div class="header">
         <div class="logo float-left">
             <h1>Métodos Numéricos</h1>
         </div>
-        <nav class="main-nav float-right d-none d-lg-block">
+        <nav class="header main-nav float-right d-none d-lg-block">
             <ul>
-                <li><a href="../#">Inicio</a></li>
-                <li><a href="../">Calculadora</a></li>
+                <li><a href="{% url 'inputMinSquare' %}">Interpolación</a></li>
+                <li><a href="{% url 'inputLU' %}">Sistema de Ecuaciones</a></li>
+                <li><a href="{% url 'inputdata' %}">Raices de Ecuaciones</a></li>
+                <li><a href="{% url 'home' %}">Inicio</a></li>
+                
             </ul>
         </nav>
         <!-- .main-nav -->
@@ -66,8 +69,15 @@
                                 <div class="container h-100">
                                     <div class="row justify-content-center h-100">
                                         <div class="col-sm-10 text-left">
+                                            <p>  
+                                                Es una técnica de interpolación de un conjunto de datos o de una función por un polinomio. 
+                                                Es decir, dado cierto número de puntos obtenidos por muestreo o a partir de un experimento 
+                                                se pretende encontrar un polinomio que pase por todos los puntos.
+                                            </p>
+                                            <p><strong>Cálculo</strong></p>
                                             <ol>
                                                 <li>
+<<<<<<< HEAD
                                                     <p><strong>f(x)=ln(x<sup>2</sup>+1)-e<sup>x/2</sup>cos(πx)=0</strong>
                                                         Tiene una cantidad infinita de raíces, graficando en el
                                                         intervalo [-5,6] se tiene: </p>
@@ -75,7 +85,19 @@
                                                     <p> Se quiere emplear el método de la bisección para encontrar una
                                                         solución aproximada de la primera raíz de la ecuación f(x)=0 ,
                                                         en el intervalo [0.1, 0.5], con una exactitud de 10<sup>-2<sup>
+=======
+                                                    <p><strong>Método de las diferencias divididas de Newton</strong></p>
+                                                    <p>Sea f_{n} una variable discreta de n  elementos y sea x_{n} otra variable discreta de 
+                                                        n elementos los cuales corresponden, por parejas, a la imagen u ordenada y abcisa de 
+                                                        los datos que se quieran interpolar, respectivamente, 
+                                                        tales que: f(xk) = fk,   k=0,1,2...n </p>
+
+                                                    <p> Este método es algorítmico y resulta sumamente cómodo en determinados casos, sobre todo 
+                                                        cuando se quiere calcular un polinomio interpolador de grado elevado
+                                                        El polinomio de grado n resultante tendrá la forma
+>>>>>>> origin/tryUnion
                                                     </p>
+                                                    
                                                 </li>
                                                 <li>
                                                     <p>Aproximar la unica raiz real <strong>r</strong> de la siguiente
@@ -89,14 +111,6 @@
                                                         para encontrar una solución aproximada de la primera raíz de la
                                                         ecuación f(x)=0 , en el intervalo [0.1, 0.5], con una exactitud
                                                         de 10<sup>-2<sup></p>
-                                                </li>
-                                                <li>
-                                                    <p>Aplicando el metodo de biseccion para: <strong>
-                                                            f(x)=cos(x)-x</strong></p>
-                                                    <strong>(a) </strong>Calcula una cota de error para la fase 10.
-                                                    <p><strong>(b) </strong> Calcula el número de pasos necesarios para
-                                                        aproximar la solución con 4
-                                                    </p>
                                                 </li>
 
                                             </ol>
@@ -118,19 +132,21 @@
                                 <div class="accordion-body">
                                     <div class="container h-100">
                                         <div class="row justify-content-center h-100">
+                                            <p>En análisis numérico un algoritmo de búsqueda de raíces es un método numérico o algorítmico para 
+                                                encontrar las soluciones aproximadas de una ecuación dada por la expresión f(x) = 0 para una 
+                                                función matemática f dada. A la solución x de la ecuación se le llama raíz o cero de la función.</p>
                                             <div class="col-sm-10 text-Left">
                                                 <ol>
-                                                    <li>Hallar la unica raíz real de f(x) = senx - coscx + 1 ; con
-                                                        x<sub>I</sub>=0.5, x<sub>D</sub>=0.7 y con un error admisible de
-                                                        10<sup>-5</sup>
-                                                        <img src="./img/propuestos/falsaposicion1.jpg"
-                                                            class="imgEjercicio">
-                                                    </li><br>
-                                                    <li>Usar el método de la regla falsa para aproximar la raíz de
-                                                        f(x)=e<sup>-x</sup>-lnx , comenzando en el intervalo [1,2] y
-                                                        hasta que |E<sub>a</sub>
-                                                        < 1%|</li>
-                                                            <p></p>
+                                                    <li>
+                                                        <p><strong>Método Biseccion</strong></p> 
+                                                        
+                                                    </li>
+                                                    <li>
+                                                        <p><strong>Método Newton</strong></p> 
+                                                    </li>
+
+                                                    <li>
+                                                        <p><strong>Método Regla Falsa</strong></p> 
                                                     </li>
 
                                                     </li>
@@ -154,25 +170,35 @@
                                     <div class="accordion-body">
                                         <div class="container h-100">
                                             <div class="row justify-content-center h-100">
+                                                 <p>
+                                                    Un sistema de ecuaciones lineales es un conjunto de m ecuaciones lineales con n incógnitas, cuya solución  
+                                                    es un conjunto de valores para las incógnitas con el que se satisfacen todas las ecuaciones. Se asume que 
+                                                    los elementos que componen las ecuaciones están definidos en los números reales y que siempre hay la misma 
+                                                    cantidad de ecuaciones que de incógnitas. En consecuencia, el problema consiste en buscar la única solución 
+                                                    al sistema, si existe. 
+                                                 </p>       
                                                 <div class="col-sm-10 text-Left">
                                                     <ol>
-                                                        <li>Hallar la unica raíz real de f(x) = senx - coscx + 1 ; con
-                                                            x<sub>I</sub>=0.5, x<sub>D</sub>=0.7 y con un error
-                                                            admisible de 10<sup>-5</sup>
-                                                            <img src="./img/propuestos/falsaposicion1.jpg"
-                                                                class="imgEjercicio">
-                                                            <p>Comparar con el numero de iteraciones obtenido al
-                                                                resolverlo con el metodo de falsa posicion normal</p>
-                                                        </li><br>
-                                                        <li>Usar el método de la regla falsa para aproximar la raíz de
-                                                            f(x)=e<sup>-x</sup>-lnx , comenzando en el intervalo [1,2] y
-                                                            hasta que |E<sub>a</sub>|
-                                                            < 1%</li>
-                                                                <br>
-                                                        <li>Usar el método de la regla falsa modificada para aproximar
-                                                            la raíz de f(x)=e<sup>-x</sup>-lnx , comenzando en el
-                                                            intervalo [1,2] y hasta que |E<sub>a</sub>
-                                                            <1%|< /li>
+                                                        <li>
+                                                            <p><strong>Eliminación Gaussiana Simple.</strong></p> 
+                                                            
+                                                        </li>
+                                                        <li>
+                                                            <p><strong>Eliminación Gaussiana con Pivoteo Parcial.</strong></p> 
+                                                        </li>
+    
+                                                        <li>
+                                                            <p><strong>Eliminación Gaussiana con Pivoteo Total.</strong></p> 
+                                                        </li>
+                                                        <li>
+                                                            <p><strong>Factorización directa de matrices </strong></p> 
+                                                        </li>
+                                                        <li>
+                                                            <p><strong>Cholesky.</strong></p> 
+                                                        </li>
+                                                        <li>
+                                                            <p><strong>Crout.</strong></p> 
+                                                        </li>
                                                     </ol>
 
                                                 </div>

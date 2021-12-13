@@ -1,8 +1,9 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render, reverse
 from findRoot import bisection, muller_custo, bairstow
-from systemEq import choleskyDescomposition, gaussSeidel
+from systemEq import choleskyDescomposition, gaussSeidel,crout
 from interpolation import minSquaremetodo, newtonDifDiv, Lagrange
+
 # Create your views here
 
 
@@ -35,7 +36,7 @@ def passDataMatrixLU(request):
                     key = "x"+str(count)
                     val = start.get(key)
                     if val:
-                        val = int(val)
+                        val = float(val)
                         row.append(val)
                         pass
                     else:
@@ -49,7 +50,7 @@ def passDataMatrixLU(request):
                 key = "c"+str(i)
                 val = start.get(key)
                 if(val):
-                    val = int(val)
+                    val = float(val)
                     constCoefs.append([val, ])
                 else:
                     print("No existe la llave: ", key)
@@ -217,7 +218,6 @@ def adminMethods(coefs, guesses, method):
         output = "El metodo que pusiste no lo soportamos"
     return output
 
-
 def adminMethodsLU(A, B, method):
     output = ""
     if(method == "choleski"):
@@ -226,11 +226,10 @@ def adminMethodsLU(A, B, method):
     elif(method == "gauss"):
         output = gaussSeidel.metodoGaussSeidel(A, B)
     elif(method == "crout"):
-        output = "Aun no soportamos el Metodo Crout"
+        output = crout.croutMetodo(A,B)
     else:
         output = "Este metodo no lo tenemos"
     return output
-
 
 def adminInterpolation(X, Y, method):
     context = {}

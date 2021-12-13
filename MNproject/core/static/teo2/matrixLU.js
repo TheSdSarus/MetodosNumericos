@@ -108,7 +108,6 @@ function createMatrix() {
     removeAllChildNodes(container);
     let cont = 0;
     while( cont != order){
-
         let minBox = document.createElement("div");
         let label = document.createElement("label");
         let input = document.createElement("input");

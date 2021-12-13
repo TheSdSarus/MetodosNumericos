@@ -1,8 +1,15 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render, reverse
 from findRoot import bisection, muller_custo, bairstow
+<<<<<<< HEAD
 from systemEq import choleskyDescomposition, gaussSeidel, cramer
+||||||| c364285
+from systemEq import choleskyDescomposition, gaussSeidel
+=======
+from systemEq import choleskyDescomposition, gaussSeidel,crout
+>>>>>>> 3ca7f2f58e161b97de2e95953041e5d9bf277bdf
 from interpolation import minSquaremetodo, newtonDifDiv, Lagrange
+
 # Create your views here
 
 
@@ -35,7 +42,7 @@ def passDataMatrixLU(request):
                     key = "x"+str(count)
                     val = start.get(key)
                     if val:
-                        val = int(val)
+                        val = float(val)
                         row.append(val)
                         pass
                     else:
@@ -49,7 +56,7 @@ def passDataMatrixLU(request):
                 key = "c"+str(i)
                 val = start.get(key)
                 if(val):
-                    val = int(val)
+                    val = float(val)
                     constCoefs.append([val, ])
                 else:
                     print("No existe la llave: ", key)
@@ -75,8 +82,8 @@ def passDataMatrixLU(request):
 
 def passData(request):
     timesConst = {
-        "bairstow": 0,
-        "muller": 3,
+        "bairstow": 0,#0 variables
+        "muller": 3,# 3 variables
         "newton": 2  # bisseccion
     }
     start = request.GET
@@ -85,7 +92,6 @@ def passData(request):
         try:
             cantVars = start["cant"]
             method = start["method"]
-            cantVars = start["cant"]
         except:
             print("Value Error error a [cant, method, cant]")
         
@@ -117,7 +123,7 @@ def passData(request):
         # variables
         guesses = []
         for times in range(timesConst[method]):
-            guesses.append(start["var"+str(times)])
+            guesses.append(start.get("var"+str(times)))
 
         output= ""
         output = adminMethods(coefs=coefs,guesses=guesses,method=method)
@@ -218,7 +224,6 @@ def adminMethods(coefs, guesses, method):
         output = "El metodo que pusiste no lo soportamos"
     return output
 
-
 def adminMethodsLU(A, B, method):
     output = ""
     if(method == "choleski"):
@@ -227,13 +232,18 @@ def adminMethodsLU(A, B, method):
     elif(method == "gauss"):
         output = gaussSeidel.metodoGaussSeidel(A, B)
     elif(method == "crout"):
+<<<<<<< HEAD
         output = "Aun no soportamos el Metodo Crout"
     elif(method == "cramer"):
         output = cramer.metodoCramer(A,B)
+||||||| c364285
+        output = "Aun no soportamos el Metodo Crout"
+=======
+        output = crout.croutMetodo(A,B)
+>>>>>>> 3ca7f2f58e161b97de2e95953041e5d9bf277bdf
     else:
         output = "Este metodo no lo tenemos"
     return output
-
 
 def adminInterpolation(X, Y, method):
     context = {}

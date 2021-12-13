@@ -67,7 +67,7 @@ def bairstowMain(COEFICIENTES,r=None,s=None):
 	if not COEFICIENTES:
 		return "Necesitas llenar el aprametro Coeficientes!\n"
 		#COEFICIENTES = [1, -3.5 ,2.75 ,2.125 ,-3.875 ,1.25]	#coeficientes
-	g = 3 	#grado de la ecuacion
+	g = len(COEFICIENTES)-1 	#grado de la ecuacion
 	if not r or not s:
 		r = random.random()
 		s = random.random()
@@ -82,6 +82,6 @@ def bairstowMain(COEFICIENTES,r=None,s=None):
 	return mystr	
 
 if __name__ == "__main__":
-	COEFICIENTES = [1, -3, 3 , -1]
+	COEFICIENTES = [1, 0 , -1]
 	mystr = bairstowMain(COEFICIENTES,r=0,s=0)	
 	print(mystr)

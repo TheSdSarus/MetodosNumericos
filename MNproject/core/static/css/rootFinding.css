@@ -6,19 +6,19 @@ body {
 }
 
 .container{
-/* border: 1px red solid;*/ 
+  border: 1px red solid; 
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px 50px;
   padding: 40px;
 }
 .container .inputData{
-/*    border: 1px red solid;
-*/}
+   border: 1px red solid;
+}
 
 .container .inputData .formGroup{
-/*    border: 1px red solid;
-*/  padding: 20px 0px;
+  border: 1px red solid;
+  padding: 20px 0px;
 }
 
 .container .inputData .formGroup--button{

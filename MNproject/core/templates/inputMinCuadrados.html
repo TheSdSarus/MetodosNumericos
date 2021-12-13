@@ -1,41 +1,83 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Minimos Cuadrados Calculadora</title>
-        {% load static %}
-    </head>
-    <body>
-        <h1>Minimos Cuadrados Calculadora Input</h1>
+
+<head>
+    <title>Minimos Cuadrados Calculadora</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/rootFinding.css' %}">
+</head>
+
+<body>
+
+    <div class="header">
+        <a class="logo">MN</a>
+        <div class="header-right">
+            <a class="active" href="{% url 'home' %}">Home</a>
+            <a href="{% url 'inputdata' %}">RootFinding</a>
+        </div>
+    </div>
+
+
+    <div class="container">
 
         <section class="inputZone">
 
-            <form class="inputForm">
-                <label for="method">Metodo : </label>
-                <select id="method" name="method">
-                    <option value="minSquare"> Minimos Cuadrados  </option>
-                    <option value="difDivididas">Diferencias Divididas</option>
-                    <option value="lagra">Lagrange</option>
-                </select>
-                <label for="inputRows">Ingrese el numero de elementos:  </label>
-                <input type="number" id="inputRows" placeholder="Numero de filas" maxlength="30" minlength="2">
-                <section id="sectionInputGeneral">
-                    <div id="inputsX">
-                        <div>
-                            <label>
-                                Hello Friend:<input type="number" >
-                            </label>
-                        </div>
-                    </div>
-                    <br>
-                    <div id="inputsY">
-    
-                    </div> 
-                </section>
-            </form>
-            <button   id="sendButton">Resolver!!</button>
-        </section>
-    </body>
+            <div class="inputData">
+                <h1>Minimos Cuadrados Calculadora Input</h1>
+             
+                <form class="inputForm">
 
-    <script src="{% static 'teo3/inputMinSquare.js' %}" type="module"></script>
+                    <div class="formGroup">
+                        <label for="method">Metodo : </label>
+                        <select id="method" name="method">
+                            <option value="minSquare"> Minimos Cuadrados </option>
+                            <option value="difDivididas">Diferencias Divididas</option>
+                            <option value="lagra">Lagrange</option>
+                        </select>
+                    </div>
+                    <div class="formGroup">
+                        <div>
+                            <label for="inputRows">Ingrese el numero de elementos: </label>
+                        </div>
+                        <div>
+                            <input type="number" id="inputRows" placeholder="Numero de filas" maxlength="30" minlength="2">
+                        </div>
+                        <div>
+                            <section id="sectionInputGeneral">
+                                <div id="inputsX">
+                                    <div>
+                                        <label>
+                                            Hello Friend:<input type="number">
+                                        </label>
+                                    </div>
+                                </div>
+                                <br>
+                                <div id="inputsY">
+            
+                                </div>
+                            </section>
+                        </div>
+                        
+                        
+                        
+                    </div>
+                    
+                    
+                </form>
+            </div>
+            <div>
+                <button id="sendButton">Resolver!!</button>
+            </div>
+
+            
+
+        </section>
+    </div>
+
+
+
+</body>
+
+<script src="{% static 'teo3/inputMinSquare.js' %}" type="module"></script>
 
 </html>

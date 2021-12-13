@@ -13,13 +13,13 @@ body {
     padding: 40px;
 }
 .container .inputData{
-/*    border: 1px red solid;
-*/}
+    border: 1px red solid;
+}
 
 .container .inputData .formGroup{
-/*    border: 1px red solid;
-*/    padding: 20px 0px;
-  }
+    border: 1px red solid;
+    padding: 20px 0px;
+}
   
 .container .inputData .inputData--button{
    display: flex;
@@ -37,8 +37,8 @@ body {
 
 
 .container .result{
-/*    border: 1px red solid;
-*/}
+   border: 1px red solid;
+}
     
 
 

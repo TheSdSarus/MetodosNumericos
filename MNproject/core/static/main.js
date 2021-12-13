@@ -68,7 +68,7 @@ function createInputVars(numberVars){
 export function getVariables(initVariables){
     if(initVariables == 0){
         console.log("Bairstow Methos en getVariables() no se usa");
-        return;
+        return "&var=0";
     }
     const variables = initVariables;
     let items = [];

@@ -1,4 +1,3 @@
-import { readAndParseJson } from "@angular/cli/utilities/json-file";
 
 // import { removeAllChildNodes } from "../inputdata.js";
 const URL_WEB = "http://127.0.0.1:8000/";

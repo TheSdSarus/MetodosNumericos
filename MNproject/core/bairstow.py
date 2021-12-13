@@ -1,20 +1,6 @@
-# -*- coding:utf-8 -*-
-
-# Bairstow Method implemented by PowerUp Masters
-# WhatsApp: +57 (311)-7103897 | +57 (311)6301489
-
 import cmath
 import random
 
-
-'''
-   Bairstow's Method where:
-      r = Initial guess
-      s = Initial guess
-     roots = Empty Array
-   a = Coefficient's vector
-   g = Polinomial's degree   
-'''   
 def bairstow(a,r,s,g,roots):
 	dumpStr = ""
 	if(g<1):
@@ -66,11 +52,6 @@ def bairstow(a,r,s,g,roots):
 # a = [1,-3.5,2.75,2.125,-3.875,1.25]	#coeficientes
 # r = random.random()
 # s = random.random()
-# bairstow(a,r,s,g,roots)
-# print("\nFound Roots => \n")
-# for r in roots:
-# 	print("R" + str(k) + " = " + str(r))
-# 	k += 1
 
 def bairstowMain(COEFICIENTES,r=None,s=None):
 	if not COEFICIENTES:
@@ -85,7 +66,7 @@ def bairstowMain(COEFICIENTES,r=None,s=None):
 	k=0
 	mystr = ""
 	for r in roots:
-		mystr += ("R" + str(k) + " = " + str(r)+"\n")
+		mystr += ("R" + str(k) + " = " + str(round(r.real,5))+"\n")
 		k += 1
 	return mystr	
 

@@ -69,7 +69,7 @@ def muller(guesses):
     memory = 0
     maxIter = 15
     x3 = -1
-    while error < tole or maxIter == 0:
+    while error.real < tole.real or maxIter.real == 0:
         error = x3 - memory
         a2 = f3(x2,x1,x0)
         a1 = f2(x2,x1) -(x2+x1)*a2

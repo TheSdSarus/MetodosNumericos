@@ -3,17 +3,6 @@ import cmath
 import math
 MAX = 100
 
-# def printMatrix(matrix,title="Matrix <Nombre>"):
-#     str1 = f'''{"*"*4} {title} {"*"*4} \n'''
-#     for i in range(len(matrix)):
-#         for j in range(len(matrix[0])):
-#             str1 += f"{matrix[i][j]}\t"
-#         str1+="\n"
-#     return str1
-    # print("*"*4,title,"*"*4)
-    # print(str1)  
-
-  
 def isTranspuesta(matrix):
     for i in range(len(matrix)):
         for j in range(len(matrix[0])):
@@ -88,9 +77,6 @@ def main():
 	]
 	mystr= ""
 	(lower,upper) = Cholesky_Decomposition(matrix)
-	
-	# print(lower)
-	# print(upper)
 	rootsX = solveMatrix(lower,upper,B)
 	mystr += printMatrix(matrix,title="Original Matrix",nround=4)
 	mystr += printMatrix(lower,title="Lower Matrix",nround=4)

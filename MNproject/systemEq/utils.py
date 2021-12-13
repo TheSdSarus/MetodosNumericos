@@ -37,7 +37,7 @@ def getMatrixInverse(m):
     return cofactors
 
 def printMatrix(matrix,title="Matrix <Nombre>",nround=None):
-    str1 = f'''{"*"*4} {title} {"*"*4} \n'''
+    str1 = f'''<h3>{"*"*4} {title} {"*"*4}</h3> \n'''
     if(nround):
         for i in range(len(matrix)):
             for j in range(len(matrix[0])):

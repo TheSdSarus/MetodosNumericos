@@ -5,18 +5,18 @@ body {
 }
 
 .container{
-  border: 1px red solid; 
+  /*border: 1px red solid; */
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px 50px;
   padding: 40px;
 }
 .container .inputData{
-   border: 1px red solid;
+   /*border: 1px red solid;*/
 }
 
 .container .inputData .formGroup{
-  border: 1px red solid;
+  /*border: 1px red solid;*/
   padding: 20px 0px;
 }
 
@@ -51,13 +51,13 @@ body {
 
 
 .container .graphic{
-  border: 1px red solid;
+  /*border: 1px red solid;*/
   display: flex;
   justify-content: center;
   
 }
 .container .graphic .graphicImage{
-  border: 1px red solid;
+  /*border: 1px red solid;*/
   overflow: hidden;
 
 }

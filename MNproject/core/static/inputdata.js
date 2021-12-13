@@ -84,6 +84,8 @@ function sendData(){
     "&x8="+crossList[8]+
     "&x9="+crossList[9]+
     sendVars+"&cant="+cantVars+"";    
+
+    print(crossList[9])
 }
 
 

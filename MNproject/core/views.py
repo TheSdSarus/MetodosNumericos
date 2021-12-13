@@ -1,7 +1,7 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render, reverse
 from findRoot import bisection, muller_custo, bairstow
-from systemEq import choleskyDescomposition, gaussSeidel
+from systemEq import choleskyDescomposition, gaussSeidel, cramer
 from interpolation import minSquaremetodo, newtonDifDiv, Lagrange
 # Create your views here
 
@@ -228,6 +228,8 @@ def adminMethodsLU(A, B, method):
         output = gaussSeidel.metodoGaussSeidel(A, B)
     elif(method == "crout"):
         output = "Aun no soportamos el Metodo Crout"
+    elif(method == "cramer"):
+        output = cramer.metodoCramer(A,B)
     else:
         output = "Este metodo no lo tenemos"
     return output

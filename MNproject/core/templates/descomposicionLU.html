@@ -15,9 +15,10 @@
     <h3>Descomposicion LU</h3>
     <form name="" id="">
         <select id="metodo" name="metodo">
-            <option value="gauss" selected>Metodo Gauss</option>
+            <option value="gauss" selected>Metodo Gauss Seindel (Puntos iniciales 0)</option>
             <option value="choleski">Metodo choleski</option>
             <option value="crout">Metodo crout</option>
+            <option value="cramer">Metodo cramer</option>
         </select>
         <select id="orderMatrix" name="orderMatrix">
             <option value="3" selected>Matrix 3x3</option>
@@ -54,7 +55,7 @@
     function asd() {
         tam = 3
         var table = "<table id='answere1'>";
-        
+
         let h = 1;
         let l = 1;
 

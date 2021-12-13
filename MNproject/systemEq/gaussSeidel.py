@@ -41,8 +41,10 @@ print('\nSolution: x=%0.3f, y=%0.3f and z = %0.3f\n'% (x1,y1,z1))
 '''
 
 def metodoGaussSeidel(A,B):
-    x = [0, 0, 0]
+    x = []
     C = m1(B)
+    for i in range(len(C)):
+        x.append(0)
     mystr= ""
     mystr += printMatrix(A,title="Original Matrix",nround=4)
 

@@ -4,48 +4,94 @@
 <head>
     <title>Encontrar Raices con pasos</title>
     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/rootFinding.css' %}">
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 </head>
 
 <body>
-    <h3>Aqui se recibiran los datos</h3>
-    <form>
-        <label for="tipo" > Metodo a usar: </label>
-        <select name="method" id="method">
-            <option value="bairstow" selected>Metodo bairstow</option>
-            <option value="muller">Metodo Muller</option>
-            <option value="newton">Metodo Biseccion</option>
-        </select>
-        <div id="initialGuesses">
-            <label for="var1">Variable 01: </label>
-            <input type="text" name="var1" >
-        </div>
-        <select name="coef" id="coeficientes">
-            <option value="1" selected>1 variable</option>
-            <option value="2">2 variables</option>
-            <option value="3" >3 variables</option>
-            <option value="4">4 variables</option>
-            <option value="5">5 variables</option>
-            <option value="6">6 variables</option>
-            <option value="7">7 variables</option>
-            <option value="8">8 variables</option>
-            <option value="9">9 variables</option>
-            <option value="10">10 variables</option>
-        </select>
-        <div id="inputBoxes">
-            <label for="x1">X1: </label>
-            <input type="text" name="x1">
-            <!--
-                    Esto ahoremos de acuerdo al numero
-                    <label for="x1">X1: </label>
-                    <input type="text" name="x1">
-                -->
-        </div>
-        
-    </form>
-    <button id="sendButton">Click me</button>
-    <img src="{% static 'deepForest.jpg' %}" width="200 px">
 
+    <div class="header">
+        <a class="logo">MN</a>
+        <div class="header-right">
+            <a class="active" href="{% url 'home' %}">Home</a>
+            <a href="{% url 'inputLU' %}">Descomposicion LU</a>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="inputData">
+
+
+            <h3>Aqui se recibiran los datos</h3>
+            <form>
+                <div class="formGroup">
+                    <label for="tipo"> Metodo a usar: </label>
+                    <select name="method" id="method">
+                        <option value="bairstow" selected>Metodo bairstow</option>
+                        <option value="muller">Metodo Muller</option>
+                        <option value="newton">Metodo Biseccion</option>
+                    </select>
+
+                </div>
+
+                <div class="formGroup" id="initialGuesses">
+                    <label for="var1">Variable 01: </label>
+                    <input type="text" name="var1">
+                </div>
+
+                <div class="formGroup">
+                    <select name="coef" id="coeficientes">
+                        <option value="1" selected>1 variable</option>
+                        <option value="2">2 variables</option>
+                        <option value="3">3 variables</option>
+                        <option value="4">4 variables</option>
+                        <option value="5">5 variables</option>
+                        <option value="6">6 variables</option>
+                        <option value="7">7 variables</option>
+                        <option value="8">8 variables</option>
+                        <option value="9">9 variables</option>
+                        <option value="10">10 variables</option>
+                    </select>
+                </div>
+
+                <div id="inputBoxes" class="formGroup formGroup--variable">
+                    <div class="inputBoxes">
+
+                        <label for="x1">X1: </label>
+                        <input type="text" name="x1">
+
+                    </div>
+                </div>
+
+            </form>
+            <div class="">
+                <button class="button" id="sendButton">Resolver</button>
+            </div>
+
+        </div>
+        <div class="graphic">
+            <div class="graphicImage">
+                <img src="{% static 'deepForest.jpg' %}" width="200 px">
+            </div>
+
+        </div>
+        <div class="result">
+
+            {% if method %}
+            <section>
+                <h2>Solucion, por el metodo {{method}}</h2>
+                <section class="resolucion">
+                    <p style="white-space: pre-wrap;"> {{output}} </p>
+                </section>
+            </section>
+            {% else %}
+            <p>Mande los datos!
+            </p>
+            {% endif %}
+
+        </div>
+    </div>
 </body>
 <!-- <script src="{% static 'inputData.js' %}">
 

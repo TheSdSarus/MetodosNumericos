@@ -24,8 +24,8 @@ from pprint import pprint as pp
 def croutMetodo(A,B):
     output = ""
     LU = crout(A)
-    output += printMatrix(LU[0],"Matriz Inferior")
-    output += printMatrix(LU[1],"Matriz Superior")
+    output += printMatrix(LU[0],"Matriz Inferior",nround=4)
+    output += printMatrix(LU[1],"Matriz Superior",nround=4)
     roots = solveMatrix(LU[0],LU[1],B)
     output += printMatrix(roots,"Matriz Solucion",nround=6)
     return output

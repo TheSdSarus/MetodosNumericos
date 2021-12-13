@@ -23,7 +23,7 @@ def getLinealFunc(X,Y):
     
     #get B
     b = (sY - a*sX)/n
-    print(b)
+    #print(b)
     return (a,b)
     
     print("N= ",n)

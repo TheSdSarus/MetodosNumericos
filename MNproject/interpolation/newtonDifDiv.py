@@ -1,7 +1,7 @@
 import numpy as np
 import plotly.graph_objects as go
 
-def divided_diff(x, y):
+def diferenciasDivididas(x, y):
     n = len(y)
     coef = np.zeros([n, n])
     coef[:,0] = y
@@ -25,7 +25,7 @@ def newton_poly(coef, x_data, x):
 def difDivMethod(X,Y):
     coorX = np.array(X)
     coorY = np.array(Y)
-    coefs = divided_diff(coorX, coorY)[0,:]
+    coefs = diferenciasDivididas(coorX, coorY)[0,:]
     #ahora a probar el polinomio que esta en "coefs"
     newCoordX = np.arange(X[0],X[-1]+0.1,0.1)
     newCoordY = newton_poly(coefs,coorX,newCoordX)
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     # x = np.array([-5, -1, 0, 2])
     # y = np.array([-2, 6, 1, 3])
     # # get the divided difference coef
-    # a_s = divided_diff(x, y)[0, :]
+    # a_s = diferenciasDivididas(x, y)[0, :]
 
     # # evaluate on new data points
     # x_new = np.arange(-5, 2.1, .1)

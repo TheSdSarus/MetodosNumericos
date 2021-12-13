@@ -1,17 +1,9 @@
 import numpy as np
-# import matplotlib.pyplot as plt
 import plotly.graph_objects as go
-# plt.style.use('seaborn-poster')
 
-# matplotlib inline
 def divided_diff(x, y):
-    '''
-    function to calculate the divided
-    differences table
-    '''
     n = len(y)
     coef = np.zeros([n, n])
-    # the first column is y
     coef[:,0] = y
     
     for j in range(1,n):

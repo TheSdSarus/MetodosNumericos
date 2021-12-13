@@ -69,13 +69,6 @@ def getCoefRelation(X,Y):
 
 def getCoordY(coefs = None,X=[]):
     y = []
-    # if not X:
-    #     print("No hay abscisas : 'X'")
-    #     return y
-    # if not coefs:
-    #     print("No pusiste el parametro 'coefs'")
-    #     return y
-
     f = lambda item: coefs[0]*item+coefs[1]
     
     for absc in X:

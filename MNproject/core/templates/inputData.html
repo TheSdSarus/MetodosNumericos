@@ -71,9 +71,11 @@
 
         </div>
         <div class="graphic">
-            <div class="graphicImage">
-                <img src="{% static 'deepForest.jpg' %}" width="200 px">
-            </div>
+            {% if graph %}
+            {{graph|safe}}
+            {% else %}
+            <p> Aun no hay grafico!!</p>
+            {% endif %}
 
         </div>
         <div class="result">

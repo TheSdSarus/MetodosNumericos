@@ -379,7 +379,7 @@ def getGraph(coefs):
     coefs = convertToInt(coefs)
     fig = go.Figure()
     x = []
-    for i in range(-5,6):
+    for i in range(-100,100):
         x.append(i)
     y = []
     for item in x:

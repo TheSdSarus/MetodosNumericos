@@ -37,17 +37,17 @@ def getMatrixInverse(m):
     return cofactors
 
 def printMatrix(matrix,title="Matrix <Nombre>",nround=None):
-    str1 = f'''<h3>{"*"*4} {title} {"*"*4}</h3> \n'''
+    str1 = f'''{"*"*4} {title} {"*"*4} \n'''
     if(nround):
         for i in range(len(matrix)):
             for j in range(len(matrix[0])):
-                str1 += f"{round(matrix[i][j].real,nround)}\t"
-            str1+="\n"
+                str1 += f"{round(matrix[i][j].real,nround)}\t\t"
+            str1+="\n\n"
     else:
         for i in range(len(matrix)):
             for j in range(len(matrix[0])):
-                str1 += f"{matrix[i][j].real}\t"
-            str1+="\n"
+                str1 += f"{matrix[i][j].real}\t\t"
+            str1+="\n\n"
     return str1
 
 def multiply(matrix1,matrix2):

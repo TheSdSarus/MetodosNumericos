@@ -77,6 +77,55 @@ def getData(request):
 
 
 def matrixLU(request):
+    start = request.GET
+
+    method = start.get("method")
+    if method:
+        order = start.get("order")
+        if order:
+            coefs = []
+            count = 0
+            for i in range(int(order)):
+                row = []
+                for j in range(int(order)):
+                    key = "x"+str(count)
+                    val = start.get(key)
+                    if val:
+                        val = float(val)
+                        row.append(val)
+                        pass
+                    else:
+                        print("La key= ", key, "No existe")
+                        break
+                    count += 1
+                coefs.append(row)
+            # get constant Matrix
+            constCoefs = []
+            for i in range(int(order)):
+                key = "c"+str(i)
+                val = start.get(key)
+                if(val):
+                    val = float(val)
+                    constCoefs.append([val, ])
+                else:
+                    print("No existe la llave: ", key)
+                    break
+            # resolver el admin
+
+            outputResult = adminMethodsLU(coefs, constCoefs, method)
+            # print(coefs)
+            context = {
+                "coefs": coefs,
+                "method": method,
+                "order": order,
+                "constMatrix": constCoefs,
+                "output": outputResult
+            }
+            return render(request, "descomposicionLU.html", context)
+        else:
+            print("Order no llego=", order)
+    else:
+        print("method no llego=", method)
     return render(request, "descomposicionLU.html")
 
 # para los LU
@@ -252,7 +301,7 @@ def inputMinSquare(request):
                 "method": "Lagrange"
             }
 
-        return render(request, "outputMinCuadrados.html", context)
+        return render(request, "inputMinCuadrados.html", context)
 
     return render(request, "inputMinCuadrados.html")
 

@@ -12,39 +12,101 @@
 </script>
 
 <body>
-    <h3>Descomposicion LU</h3>
-    <form name="" id="">
-        <select id="metodo" name="metodo">
-            <option value="gauss" selected>Metodo Gauss Seindel (Puntos iniciales 0)</option>
-            <option value="choleski">Metodo choleski</option>
-            <option value="crout">Metodo crout</option>
-            <option value="cramer">Metodo cramer</option>
-        </select>
-        <select id="orderMatrix" name="orderMatrix">
-            <option value="3" selected>Matrix 3x3</option>
-            <option value="4">Matrix 4x4</option>
-            <option value="5">Matrix 5x5</option>
-        </select>
-        <div id="contenedorMatrix">
-            <input id="x0" name="x0">
-        </div>
-        <h3>Matriz Constante: </h3>
-        <div id="matrixConstante">
-            <input id="c0" name="c0">
-        </div>
-        <!-- <button name="sendDataButton" id="sendDataButton">SendData</button> -->
-    </form>
-    <button name="utilButton" id="utilButton">SendData</button>
-    <br>
 
-    <button onclick=asd()>
-        Mensajes Recibidos
-    </button>
+    <div class="header">
+        <a class="logo">MN</a>
+        <div class="header-right">
+            <a class="active" href="{% url 'home' %}">Home</a>
+            <a href="{% url 'inputdata' %}">RootFinding</a>
+        </div>
+    </div>
 
-    <br><br>
-    <pre id="respuesta">Lista: </pre>
-    <br>
-    <div id='answere1'></div>
+    <div class="container">
+        <div class="inputData">
+            <h3>Raices de Ecuaciones</h3>
+            <form name="" id="">
+                <div class="formGroup">
+                    <select id="metodo" name="metodo">
+                        <option value="gauss" selected>Metodo Gauss Seindel (Puntos iniciales 0)</option>
+                        <option value="choleski">Metodo choleski</option>
+                        <option value="crout">Metodo crout</option>
+                        <option value="cramer">Metodo cramer</option>
+                    </select>
+
+                </div>
+                <div class="formGroup">
+                    <select id="orderMatrix" name="orderMatrix">
+                        <option value="3" selected>Matrix 3x3</option>
+                        <option value="4">Matrix 4x4</option>
+                        <option value="5">Matrix 5x5</option>
+                    </select>
+                </div>
+
+                <div class="formGroup" id="contenedorMatrix">
+                    <input id="x0" name="x0">
+                </div>
+
+                <h3>Matriz Constante: </h3>
+
+                <div class="formGroup" id="matrixConstante">
+                    <input id="c0" name="c0">
+                </div>
+                <div id='answere1'></div>
+
+                <!-- <button name="sendDataButton" id="sendDataButton">SendData</button> -->
+            </form>
+
+            <div class="inputData inputData--button ">
+                <button name="utilButton" id="utilButton">SendData</button>
+            </div>
+        </div>
+        <div class="result">
+            <h1>Resultado del sistema de ecuaciones por :{{method}} </h1>
+
+            {% if method %}
+            <section class="matrix">
+                {% if coefs %}
+                <table>
+                    <tbody>
+                        {% for item in constMatrix %}
+                        <tr>
+                            <td> {{item}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+
+                <table>
+                    <h1>Matrix Original: </h1>
+                    <tbody>
+                        {% for row in coefs %}
+                        <tr>
+                            {% for item in row %}
+                            <td>{{item}}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p>No existe matriz, no llego aqui :(</p>
+                {% endif %}
+            </section>
+            {% if output %}
+            <section class="output">
+                <p style="white-space: pre-wrap;">{{output}}</p>
+            </section>
+            {% else %}
+            <p>No encontramos la solucion :(</p>
+            {% endif %}
+            {% else %}
+
+            {% endif %}
+
+        </div>
+
+    </div>
 
 </body>
 <script src="{% static 'teo2/matrixLU.js' %}" type="module">

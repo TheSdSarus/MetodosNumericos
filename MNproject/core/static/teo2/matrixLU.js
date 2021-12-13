@@ -206,7 +206,7 @@ function sendData() {
     let order = document.getElementById("orderMatrix").value;
     let requestMatrix = getMatrix(order);
 
-    let request = URL_WEB + "resultLU/?method=" + strMethod + requestMatrix + "&order=" + order + constReq;
+    let request = URL_WEB + "inputLU/?method=" + strMethod + requestMatrix + "&order=" + order + constReq;
     //console.log(request);
     window.location.href = request;
 }

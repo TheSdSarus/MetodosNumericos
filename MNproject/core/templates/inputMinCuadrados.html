@@ -1,49 +1,125 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Minimos Cuadrados Calculadora</title>
-        {% load static %}
-    </head>
-    <body>
-        <h1>Minimos Cuadrados Calculadora Input</h1>
+
+<head>
+    <title>Interpolacion</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/rootFinding.css' %}">
+</head>
+
+<body>
+
+    <div class="header">
+        <a class="logo">MN</a>
+        <div class="header-right">
+            <a class="active" href="{% url 'home' %}">Home</a>
+            <a href="{% url 'inputdata' %}">RootFinding</a>
+        </div>
+    </div>
+
+    <div class="container">
 
         <section class="inputZone">
 
-            <form class="inputForm">
-                <label for="method">Metodo : </label>
-                <select id="method" name="method">
-                    <option value="minSquare"> Minimos Cuadrados  </option>
-                    <option value="difDivididas">Diferencias Divididas</option>
-                    <option value="lagra">Lagrange</option>
-                </select>
-                <label for="inputRows">Ingrese el numero de elementos:  </label>
-                <input type="number" id="inputRows" placeholder="Numero de filas" maxlength="30" minlength="2">
-                <section id="sectionInputGeneral">
-                    <div id="inputsX">
+            <div class="inputData">
+                <h1>Interpolation</h1>
+
+                <form class="inputForm">
+
+                    <div class="formGroup">
+                        <label for="method">Metodo : </label>
+                        <select id="method" name="method">
+                            <option value="minSquare"> Minimos Cuadrados </option>
+                            <option value="difDivididas">Diferencias Divididas</option>
+                            <option value="lagra">Lagrange</option>
+                        </select>
+                    </div>
+                    <div class="formGroup">
                         <div>
-                            <label>
-                                Hello Friend:<input type="number" >
-                            </label>
+                            <label for="inputRows">Ingrese el numero de elementos: </label>
+                        </div>
+                        <div>
+                            <input type="number" id="inputRows" placeholder="Numero de filas" maxlength="30"
+                                minlength="2">
+                        </div>
+                        <div>
+                            <section id="sectionInputGeneral">
+                                <div id="inputsX">
+                                    <div>
+                                        <label>
+                                            Hello Friend:<input type="number">
+                                        </label>
+                                    </div>
+                                </div>
+                                <br>
+                                <div id="inputsY">
+
+                                </div>
+                            </section>
                         </div>
                     </div>
-                    <br>
-                    <div id="inputsY">
-    
-                    </div> 
-                </section>
-            </form>
-            <button   id="sendButton">Resolver!!</button>
+                </form>
+            </div>
+            <div>
+                <button id="sendButton">Resolver!!</button>
+            </div>
+
+
         </section>
+        <div class="graphic">
+            <div class="graphicImage">
+                {% if graph %}
+                {{graph|safe}}
+                {% else %}
+                <h2>Aun no hay graficos</h2>
+                {% endif %}
+            </div>
 
-        <button onclick = "render(4)">
-            Mensajes Recibidos
-        </button>
-        <br><br>
-        <pre id="respuesta">Lista: </pre>
-        <br>
-        <div id='answere1'></div>
-    </body>
+        </div>
+        <div class="result">
 
-    <script src="{% static 'teo3/inputMinSquare.js' %}" type="module"></script>
+            {% if cant %}
+
+            <h2>Los datos tienen una longitud de {{cant}}</h2>
+            <h3>Metodo Elegido : {{method}}</h3>
+            <section class="outputZone">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>X</th>
+                            <th>Y</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if arr %}
+                        {% for item1,item2 in arr %}
+                        <tr>
+                            <td>{{item1}}</td>
+                            <td>{{item2}}</td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td>
+                                No hay datos, losiento
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+                <div id="ZONE_SOLUTION">
+                    <p style="white-space: pre-wrap;">{{output}}</p>
+                </div>
+            </section>
+            {% else %}
+            <h2>No llego los datos!!!!</h2>
+            {% endif %}
+
+        </div>
+    </div>
+
+</body>
+
+<script src="{% static 'teo3/inputMinSquare.js' %}" type="module"></script>
 
 </html>
